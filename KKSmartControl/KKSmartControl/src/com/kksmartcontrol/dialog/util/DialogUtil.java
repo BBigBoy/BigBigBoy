@@ -1,0 +1,56 @@
+package com.kksmartcontrol.dialog.util;
+
+import android.app.Activity;
+import android.content.Context;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.LayoutInflater;
+import android.view.View;
+
+public class DialogUtil {
+
+	public enum SeekType {
+		BACKLIGHT_BAR, BRIGHTNESS_BAR, CONTRASTNESS_BAR, TONE_BAR, SHAPNESS_BAR, RGIN_BAR, GGAIN_BAR, BGAIN_BAR,
+	}
+ 
+
+	/**
+	 * 创建默认大小对话框
+	 * 
+	 * @param context
+	 *            Activity上下文
+	 * @param layoutID
+	 *            布局文件ID
+	 * @return
+	 */
+	public static View createDialogView(Context context, int layoutID) {
+		return createDialogView(context, layoutID, 0.7f, 0.8f);
+	}
+
+	/**
+	 * 创建自定义大小对话框
+	 * 
+	 * @param context
+	 *            Activity上下文
+	 * @param layoutID
+	 *            布局文件ID
+	 * @param scalewidh
+	 *            宽度屏占比
+	 * @param scaleheight
+	 *            高度屏占比
+	 * @return
+	 */
+	public static View createDialogView(Context context, int layoutID,
+			float scalewidh, float scaleheight) {
+		View layoutView = LayoutInflater.from(context).inflate(layoutID, null);
+		Display display = ((Activity) context).getWindowManager()
+				.getDefaultDisplay();
+		DisplayMetrics outMetrics = new DisplayMetrics();
+		display.getMetrics(outMetrics);
+		layoutView.setMinimumWidth((int) (outMetrics.widthPixels * scalewidh));
+		layoutView
+				.setMinimumHeight((int) (outMetrics.heightPixels * scaleheight));
+		return layoutView;
+	}
+
+}

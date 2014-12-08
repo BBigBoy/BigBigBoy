@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <FrameLayout
+        android:id="@+id/videodisplay"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3" >
+    </FrameLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/line_v"
+        android:contentDescription="@string/line" />
+
+    <FrameLayout
+        android:id="@+id/listlayout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <com.kksmartcontrol.pagersliding.PagerSlidingTabStrip
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+        </LinearLayout>
+    </FrameLayout>
+    <!-- 这里的SurfaceView并不会显示，由于Surfaceview对象第一次加载时会闪屏，因此在程序启动时先加载一次    播放器是继承至SurfaceView的 -->
+
+    <SurfaceView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+</LinearLayout>
