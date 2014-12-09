@@ -23,6 +23,7 @@ import android.app.FragmentTransaction;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -34,6 +35,7 @@ import android.view.View.OnDragListener;
 import android.view.ViewGroup;
 import android.view.View.DragShadowBuilder;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,14 +47,10 @@ public class MediaPlayListFragment extends Fragment implements
 
 	private SideBar sideBar;
 	private TextView dialog;
-	private PlayListAdapter adapter;
-	private List<PlayListItemModel> SourceDataList;
 	private XListView playListView;
 	private Handler mHandler;
-	// 汉字转换成拼音的类
-	private CharacterParser characterParser;
-	// 根据拼音来排列ListView里面的数据类
-	private PinyinComparator pinyinComparator;
+
+	private PlayListAdapter adapter;
 
 	private Context context = null;
 
@@ -96,10 +94,6 @@ public class MediaPlayListFragment extends Fragment implements
 	 * 初始化ListView，包括sidebar
 	 */
 	private void ListView_Init(View view) {
-		// 实例化汉字转拼音类
-		characterParser = CharacterParser.getInstance();
-
-		pinyinComparator = new PinyinComparator();
 
 		sideBar = (SideBar) view.findViewById(R.id.sidrbar);
 		dialog = (TextView) view.findViewById(R.id.dialog);
@@ -119,13 +113,9 @@ public class MediaPlayListFragment extends Fragment implements
 		});
 
 		playListView = (XListView) view.findViewById(R.id.list);
+		new FillListViewTask().execute();
 		playListView.setPullLoadEnable(false);// 设置让它上拉，FALSE为不让上拉，便不加载更多数据
 		playListView.setXListViewListener(this);
-		SourceDataList = filledData(getListFromXML());
-		// 根据a-z进行排序源数据
-		Collections.sort(SourceDataList, pinyinComparator);
-		adapter = new PlayListAdapter(context, SourceDataList);
-		playListView.setAdapter(adapter);
 		mHandler = new Handler();
 		playListView.setOnDragListener(this);
 		playListView.setOnItemClickListener(new OnItemClickListener() {
@@ -191,7 +181,7 @@ public class MediaPlayListFragment extends Fragment implements
 	}
 
 	/** 停止刷新， */
-	private void onLoad() {
+	private void stopLoad() {
 		playListView.stopRefresh();
 		playListView.stopLoadMore();
 		playListView.setRefreshTime("刚刚");
@@ -200,17 +190,10 @@ public class MediaPlayListFragment extends Fragment implements
 	// 下拉刷新
 	@Override
 	public void onRefresh() {
-		mHandler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				SourceDataList = filledData(getListFromXML());
-				// 根据a-z进行排序源数据
-				Collections.sort(SourceDataList, pinyinComparator);
-				adapter.updateListView(SourceDataList);
-				playListView.setAdapter(adapter);
-				onLoad();
-			}
-		}, 1000);
+		// adapter.updateListView(SourceDataList);
+		// playListView.setAdapter(adapter);
+		new FillListViewTask().execute();
+
 	}
 
 	// 上拉刷新及加载更多
@@ -222,7 +205,7 @@ public class MediaPlayListFragment extends Fragment implements
 				// getData();
 				Toast.makeText(context, "上拉刷新在这里更新数据", Toast.LENGTH_LONG)
 						.show();
-				onLoad();
+				stopLoad();
 			}
 		}, 1000);
 	}
@@ -253,6 +236,8 @@ public class MediaPlayListFragment extends Fragment implements
 	private List<PlayListItemModel> filledData(
 			List<HashMap<String, String>> videoList) {
 
+		// 汉字转换成拼音的类
+		CharacterParser characterParser = CharacterParser.getInstance();
 		List<PlayListItemModel> mSortList = new ArrayList<PlayListItemModel>();
 
 		for (HashMap<String, String> listItem : videoList) {
@@ -298,6 +283,32 @@ public class MediaPlayListFragment extends Fragment implements
 		}
 
 		return false;
+	}
+
+	class FillListViewTask extends
+			AsyncTask<Void, Void, List<PlayListItemModel>> {
+		@Override
+		protected void onPostExecute(List<PlayListItemModel> SourceDataList) {
+			// TODO Auto-generated method stub
+			if (adapter == null) {
+				adapter = new PlayListAdapter(context, SourceDataList);
+				playListView.setAdapter(adapter);
+			} else {
+				adapter.updateListView(SourceDataList);
+				stopLoad();
+			}
+		}
+
+		@Override
+		protected List<PlayListItemModel> doInBackground(Void... params) {
+			// 实例化汉字转拼音类
+			PinyinComparator pinyinComparator = new PinyinComparator();
+			List<PlayListItemModel> SourceDataList = filledData(getListFromXML());
+			// 根据a-z进行排序源数据
+			Collections.sort(SourceDataList, pinyinComparator);
+
+			return SourceDataList;
+		}
 	}
 
 }

@@ -9,10 +9,10 @@ import com.kksmartcontrol.fragment.ControlSettingFragment;
 import com.kksmartcontrol.fragment.MediaPlayListFragment;
 import com.kksmartcontrol.fragment.PJDiaplayFragment;
 import com.kksmartcontrol.net.NetWorkObject;
-import com.kksmartcontrol.pagersliding.PagerSlidingTabStrip; 
+import com.kksmartcontrol.pagersliding.PagerSlidingTabStrip;
 import com.kksmartcontrol.preference.PreferencesUtils;
 
-import android.app.FragmentTransaction; 
+import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -48,7 +48,7 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-	
+
 		setContentView(R.layout.activity_main);
 		NetWorkObject.context = this;
 
@@ -77,8 +77,7 @@ public class MainActivity extends FragmentActivity {
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		// 显示悬浮窗
-		MyWindowManager.displayPlusFloatWindow();
+
 		if (NetWorkObject.getInstance().getNetStatus() == NetState.TCP_CONN_OPEN) {
 			// device_con.setSelected(true);
 			// MyWindowManager.setNetState(true);
@@ -91,23 +90,24 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		// 显示悬浮窗
+		MyWindowManager.displayPlusFloatWindow();
+	}
+
+	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		PreferencesUtils.putInt(this, "rowNum",
 				KKSmartControlDataBean.getRowNum());
 		PreferencesUtils.putInt(this, "columnNum",
 				KKSmartControlDataBean.getColumnNum());
-		super.onPause();
-	}
-
-	@Override
-	protected void onStop() {
-		// TODO Auto-generated method stub
 		// 隐藏悬浮窗
 		MyWindowManager.hidePlusFloatWindow();
-		super.onStop();
-
-	}
+		super.onPause();
+	} 
 
 	@Override
 	protected void onDestroy() {
