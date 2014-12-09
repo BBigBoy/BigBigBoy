@@ -2,7 +2,7 @@ package com.kksmartcontrol.activity;
 
 import java.util.ArrayList;
 import com.example.kksmartcontrol.R;
-import com.kksmartcontrol.util.MySharedPreferences;
+import com.kksmartcontrol.preference.MySharedPreferences;
 import com.kksmartcontrol.util.ViewPagerAdapter;
 import android.app.Activity;
 import android.content.Intent;

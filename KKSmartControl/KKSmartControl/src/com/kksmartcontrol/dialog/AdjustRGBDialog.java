@@ -8,7 +8,7 @@ import com.kksmartcontrol.dialog.util.DialogUtil;
 import com.kksmartcontrol.dialog.util.DialogUtil.SeekType;
 import com.kksmartcontrol.net.ParameDataHandle.SystemFuntion;
 import com.kksmartcontrol.netcmd.SetPJ_Infor;
-import com.kksmartcontrol.util.PreferencesUtils;
+import com.kksmartcontrol.preference.PreferencesUtils;
 
 import android.app.AlertDialog;
 import android.app.Dialog; 

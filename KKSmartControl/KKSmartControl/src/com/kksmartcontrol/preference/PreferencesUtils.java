@@ -1,4 +1,4 @@
-package com.kksmartcontrol.util;
+package com.kksmartcontrol.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -10,7 +10,7 @@ import com.kksmartcontrol.fragment.MediaPlayListFragment;
 import com.kksmartcontrol.fragment.PJDiaplayFragment;
 import com.kksmartcontrol.net.NetWorkObject;
 import com.kksmartcontrol.pagersliding.PagerSlidingTabStrip; 
-import com.kksmartcontrol.util.PreferencesUtils;
+import com.kksmartcontrol.preference.PreferencesUtils;
 
 import android.app.FragmentTransaction; 
 import android.graphics.Color;

@@ -1,4 +1,4 @@
-package com.kksmartcontrol.util;
+package com.kksmartcontrol.bean;
 
 public class Coordinate implements Cloneable {
 	public int X;

@@ -2,7 +2,6 @@ package com.kksmartcontrol.bean;
 
 import java.util.ArrayList;
 
-import com.kksmartcontrol.util.Coordinate;
 
 public class KKSmartControlDataBean {
 	static String TAG = "KKSmartControlDataBean";

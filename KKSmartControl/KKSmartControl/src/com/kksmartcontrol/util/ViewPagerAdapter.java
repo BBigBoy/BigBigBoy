@@ -66,8 +66,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 	}
 
 	public void restoreState(Parcelable arg0, ClassLoader arg1) {
-		// TODO Auto-generated method stub
-
+		// TODO Auto-generated method stub 
 	}
 
 	public Parcelable saveState() {
@@ -76,8 +75,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 	}
 
 	public void startUpdate(View arg0) {
-		// TODO Auto-generated method stub
-
+		// TODO Auto-generated method stub 
 	}
 
 }

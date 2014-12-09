@@ -1,7 +1,7 @@
 package com.kksmartcontrol.activity;
 
 import com.example.kksmartcontrol.R;
-import com.kksmartcontrol.util.MySharedPreferences;
+import com.kksmartcontrol.preference.MySharedPreferences;
 
 import android.app.Activity;
 import android.content.Intent;

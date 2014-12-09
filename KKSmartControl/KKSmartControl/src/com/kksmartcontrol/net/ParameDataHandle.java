@@ -2,7 +2,7 @@ package com.kksmartcontrol.net;
 
 import java.util.ArrayList;
 
-import com.kksmartcontrol.util.Coordinate;
+import com.kksmartcontrol.bean.Coordinate;
 
 import android.util.Log;
 

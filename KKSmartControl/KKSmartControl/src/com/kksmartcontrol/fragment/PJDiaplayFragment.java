@@ -2,8 +2,8 @@ package com.kksmartcontrol.fragment;
 
 import java.lang.ref.WeakReference;
 import com.example.kksmartcontrol.R;
+import com.kksmartcontrol.bean.Coordinate;
 import com.kksmartcontrol.bean.KKSmartControlDataBean;
-import com.kksmartcontrol.util.Coordinate;
 
 import android.app.Fragment;
 import android.content.Context;

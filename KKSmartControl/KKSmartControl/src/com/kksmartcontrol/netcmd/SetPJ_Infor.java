@@ -3,11 +3,11 @@ package com.kksmartcontrol.netcmd;
 import java.util.ArrayList;
 import com.glh.montagecontrol.net.client.NetClient;
 import com.glh.montagecontrol.net.packet.CommandPacket;
+import com.kksmartcontrol.bean.Coordinate;
 import com.kksmartcontrol.bean.KKSmartControlDataBean;
 import com.kksmartcontrol.net.NetWorkObject;
 import com.kksmartcontrol.net.ParameDataHandle;
 import com.kksmartcontrol.net.ParameDataHandle.SystemFuntion;
-import com.kksmartcontrol.util.Coordinate;
 
 public class SetPJ_Infor {
 

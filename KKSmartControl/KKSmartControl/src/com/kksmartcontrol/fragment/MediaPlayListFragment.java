@@ -121,6 +121,11 @@ public class MediaPlayListFragment extends Fragment implements
 		playListView = (XListView) view.findViewById(R.id.list);
 		playListView.setPullLoadEnable(false);// 设置让它上拉，FALSE为不让上拉，便不加载更多数据
 		playListView.setXListViewListener(this);
+		SourceDataList = filledData(getListFromXML());
+		// 根据a-z进行排序源数据
+		Collections.sort(SourceDataList, pinyinComparator);
+		adapter = new PlayListAdapter(context, SourceDataList);
+		playListView.setAdapter(adapter);
 		mHandler = new Handler();
 		playListView.setOnDragListener(this);
 		playListView.setOnItemClickListener(new OnItemClickListener() {
@@ -183,11 +188,6 @@ public class MediaPlayListFragment extends Fragment implements
 				return false;
 			}
 		});
-		SourceDataList = filledData(getListFromXML());
-		// 根据a-z进行排序源数据
-		Collections.sort(SourceDataList, pinyinComparator);
-		adapter = new PlayListAdapter(context, SourceDataList);
-		playListView.setAdapter(adapter);
 	}
 
 	/** 停止刷新， */
