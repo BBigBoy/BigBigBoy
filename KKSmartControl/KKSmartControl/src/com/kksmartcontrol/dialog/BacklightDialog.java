@@ -66,7 +66,7 @@ public class BacklightDialog extends DialogFragment implements
 		context = getActivity(); 
 		
 		View layoutView = DialogUtil.createDialogView(context,
-				R.layout.backlightdialog);
+				R.layout.dialog_backlight);
 		InitView(layoutView);
 
 		AlertDialog alertdialog = new AlertDialog.Builder(getActivity())

@@ -19,7 +19,7 @@ public class ConnectServerDialog extends DialogFragment {
 		context = getActivity();
 
 		View layoutView = DialogUtil.createDialogView(context,
-				R.layout.conserverdialog, 0.6f, 0.6f);
+				R.layout.dialog_conserver, 0.6f, 0.6f);
 		AlertDialog alertdialog = new AlertDialog.Builder(getActivity())
 				.create();
 		alertdialog.setView(layoutView, 0, 0, 0, 0);

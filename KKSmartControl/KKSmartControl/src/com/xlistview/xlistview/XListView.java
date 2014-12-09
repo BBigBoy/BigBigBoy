@@ -51,8 +51,6 @@ public class XListView extends ListView implements OnScrollListener {
 
 	private final static float OFFSET_RADIO = 1.8f; // support iOS like pull
 
-	// feature.
-
 	/**
 	 * @param context
 	 */
@@ -363,7 +361,7 @@ public class XListView extends ListView implements OnScrollListener {
 	}
 
 	/**
-	 * 实现这个接口来刷新/负载更多的事件
+	 * 实现这个接口来刷新/加载更多的事件
 	 */
 	public interface IXListViewListener {
 		public void onRefresh();

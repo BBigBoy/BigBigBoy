@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/sort_letter"
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:background="#00FA9A"
+        android:clickable="false"
+        android:gravity="center_vertical"
+        android:paddingLeft="6dip"
+        android:text="A"
+        android:textColor="#0000FF"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/itemlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/source_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="SOURCE NAME"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/timelength"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="00.00.00"
+                android:textColor="@color/gray"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/format"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:paddingRight="15dp"
+                android:text="Format"
+                android:textColor="@color/gray"
+                android:textSize="10sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

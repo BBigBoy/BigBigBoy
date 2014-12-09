@@ -76,7 +76,7 @@ public class AdjustRGBDialog extends DialogFragment implements
 		context = getActivity();
 
 		View layoutView = DialogUtil.createDialogView(context,
-				R.layout.adjustrgbdialog);
+				R.layout.dialog_adjustrgb);
 		InitViewControls(layoutView);
 		AlertDialog alertdialog = new AlertDialog.Builder(context).create();
 		alertdialog.setView(layoutView, 0, 0, 0, 0);

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:layout_height="200dp"
+    android:background="@color/dialog_bg"
+    android:orientation="vertical" >
+
+    <!-- android:layout_width="320dp"    android:layout_height="200dp"   这里的长宽设置是为了方便调试，无实际意义，程序运行后会重新赋值 -->
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="8dp"
+        android:text="@string/net_err_title"
+        android:textColor="@color/dialog_font"
+        android:textSize="23sp" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/greenline"
+        android:contentDescription="@string/line" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/net_err"
+        android:textColor="@color/dialog_font"
+        android:textSize="20sp" />
+
+  <include layout="@layout/dialogbtn" />
+
+
+</LinearLayout>

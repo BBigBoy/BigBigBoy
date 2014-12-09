@@ -24,7 +24,7 @@ public class NetErrDialog extends DialogFragment implements OnClickListener {
 		context = getActivity();
 		
 		View layoutView = DialogUtil.createDialogView(context,
-				R.layout.neterrdialog);
+				R.layout.dialog_neterr);
 		InitView(layoutView);
 
 		AlertDialog alertdialog = new AlertDialog.Builder(getActivity())

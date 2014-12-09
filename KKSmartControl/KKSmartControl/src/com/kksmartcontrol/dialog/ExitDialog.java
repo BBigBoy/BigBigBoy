@@ -25,7 +25,7 @@ public class ExitDialog extends DialogFragment implements OnClickListener {
 		context = getActivity();
 	
 		View layoutView = DialogUtil.createDialogView(context,
-				R.layout.exitdialog, 0.6f, 0.6f);
+				R.layout.dialog_exit, 0.6f, 0.6f);
 		InitView(layoutView);
 
 		AlertDialog alertdialog = new AlertDialog.Builder(getActivity())

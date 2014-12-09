@@ -83,7 +83,7 @@ public class AdjustPicmodeDialog extends DialogFragment implements
 		context = getActivity();
 
 		View layoutView = DialogUtil.createDialogView(context,
-				R.layout.adjustpicmodedialog);
+				R.layout.dialog_adjustpicmode);
 		InitView(layoutView);
 
 		AlertDialog alertdialog = new AlertDialog.Builder(getActivity())

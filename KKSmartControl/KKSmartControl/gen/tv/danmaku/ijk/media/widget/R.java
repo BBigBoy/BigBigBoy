@@ -114,11 +114,11 @@ public final class R {
 		public static final int yellow = 0x7f02004a;
 	}
 	public static final class id {
-		public static final int mediacontroller_file_name = 0x7f0a0028;
-		public static final int mediacontroller_play_pause = 0x7f0a0024;
-		public static final int mediacontroller_seekbar = 0x7f0a0027;
-		public static final int mediacontroller_time_current = 0x7f0a0025;
-		public static final int mediacontroller_time_total = 0x7f0a0026;
+		public static final int mediacontroller_file_name = 0x7f0a0023;
+		public static final int mediacontroller_play_pause = 0x7f0a001f;
+		public static final int mediacontroller_seekbar = 0x7f0a0022;
+		public static final int mediacontroller_time_current = 0x7f0a0020;
+		public static final int mediacontroller_time_total = 0x7f0a0021;
 	}
 	public static final class layout {
 		public static final int mediacontroller = 0x7f03000d;

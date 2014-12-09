@@ -46,7 +46,7 @@ public class HelpActivity extends Activity implements OnClickListener,
 	super.onCreate(savedInstanceState);
 	this.pageViews = new ArrayList<View>();
 	LayoutInflater inflater = getLayoutInflater();
-	this.main = (ViewGroup) inflater.inflate(R.layout.help, null);
+	this.main = (ViewGroup) inflater.inflate(R.layout.activity_help, null);
 	this.dots = new ImageView[this.help_pics.length];
 
 	LinearLayout.LayoutParams mParams = new LinearLayout.LayoutParams(

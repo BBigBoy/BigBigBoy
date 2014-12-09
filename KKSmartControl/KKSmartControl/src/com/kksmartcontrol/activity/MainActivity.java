@@ -9,12 +9,10 @@ import com.kksmartcontrol.fragment.ControlSettingFragment;
 import com.kksmartcontrol.fragment.MediaPlayListFragment;
 import com.kksmartcontrol.fragment.PJDiaplayFragment;
 import com.kksmartcontrol.net.NetWorkObject;
-import com.kksmartcontrol.pagersliding.PagerSlidingTabStrip;
-import com.kksmartcontrol.util.MySharedPreferences;
+import com.kksmartcontrol.pagersliding.PagerSlidingTabStrip; 
 import com.kksmartcontrol.util.PreferencesUtils;
 
-import android.app.FragmentTransaction;
-import android.content.Intent;
+import android.app.FragmentTransaction; 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -50,13 +48,7 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		// 判断程序若是首次启动，则进入引导页
-		if (!MySharedPreferences.GetIsOpen(getApplicationContext())) {
-			Intent intent = new Intent();
-			intent.setClass(getApplicationContext(), HelpActivity.class);
-			startActivity(intent);
-			finish();
-		}
+	
 		setContentView(R.layout.activity_main);
 		NetWorkObject.context = this;
 

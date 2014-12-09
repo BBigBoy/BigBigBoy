@@ -22,7 +22,7 @@ public class AboutDialog extends DialogFragment implements OnClickListener {
 		context = getActivity();
 
 		
-		View layoutView =DialogUtil.createDialogView(context, R.layout.aboutdialog, 0.6f, 0.6f);
+		View layoutView =DialogUtil.createDialogView(context, R.layout.dialog_about, 0.6f, 0.6f);
 		InitView(layoutView);
 
 		AlertDialog alertdialog = new AlertDialog.Builder(getActivity())

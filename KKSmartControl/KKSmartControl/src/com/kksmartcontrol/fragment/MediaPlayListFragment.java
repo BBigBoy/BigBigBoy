@@ -70,7 +70,7 @@ public class MediaPlayListFragment extends Fragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.mediaplay_listview, container,
+		View view = inflater.inflate(R.layout.xlistview_videolist, container,
 				false);
 
 		Log.d("MediaPlayListFragment", "onCreateView");
