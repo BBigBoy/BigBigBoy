@@ -16,8 +16,8 @@ public final class R {
         public static final int push_right_out=0x7f040004;
     }
     public static final class array {
-        public static final int date=0x7f060000;
-        public static final int item=0x7f060001;
+        public static final int date=0x7f090000;
+        public static final int item=0x7f090001;
     }
     public static final class attr {
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
@@ -119,176 +119,186 @@ containing a value of this type.
         public static final int pstsUnderlineHeight=0x7f010004;
     }
     public static final class color {
-        public static final int background_tab_pressed=0x7f070003;
+        public static final int background_tab_pressed=0x7f06004d;
         /**  白色 
+ 白色 
          */
-        public static final int black=0x7f070015;
-        public static final int blue=0x7f070048;
-        public static final int bright_foreground_light=0x7f070020;
-        public static final int bright_foreground_light_disabled=0x7f070021;
-        public static final int candidate_background=0x7f07001d;
-        public static final int candidate_normal=0x7f07001a;
-        public static final int candidate_other=0x7f07001c;
-        public static final int candidate_recommended=0x7f07001b;
+        public static final int black=0x7f060011;
+        public static final int blue=0x7f06004a;
+        public static final int bright_foreground_light=0x7f06001c;
+        public static final int bright_foreground_light_disabled=0x7f06001d;
+        public static final int candidate_background=0x7f060019;
+        public static final int candidate_normal=0x7f060016;
+        public static final int candidate_other=0x7f060018;
+        public static final int candidate_recommended=0x7f060017;
         /**  weikan 
+ weikan 
          */
-        public static final int charcoal_grey=0x7f070036;
-        public static final int chuanping_bg=0x7f070032;
-        public static final int chuanping_pip_text=0x7f070034;
-        public static final int chuanping_pop_title=0x7f070033;
-        public static final int color_black=0x7f070005;
-        public static final int color_dark_grey=0x7f070004;
-        public static final int color_green=0x7f070006;
-        public static final int color_red=0x7f070007;
-        public static final int color_white=0x7f070008;
-        public static final int current_time_text=0x7f070025;
-        public static final int dark_gray=0x7f070044;
-        public static final int dark_red=0x7f070041;
-        public static final int detail_brief=0x7f07000d;
-        public static final int detail_header_bg=0x7f070010;
+        public static final int charcoal_grey=0x7f060038;
+        public static final int chuanping_bg=0x7f060034;
+        public static final int chuanping_pip_text=0x7f060036;
+        public static final int chuanping_pop_title=0x7f060035;
+        public static final int color_black=0x7f060001;
+        public static final int color_dark_grey=0x7f060000;
+        public static final int color_green=0x7f060002;
+        public static final int color_red=0x7f060003;
+        public static final int color_white=0x7f060004;
+        public static final int current_time_text=0x7f060022;
+        public static final int dark_gray=0x7f060046;
+        public static final int dark_red=0x7f060043;
+        public static final int detail_brief=0x7f060009;
+        public static final int detail_header_bg=0x7f06000c;
         /**  dialog 颜色相关 
          */
-        public static final int dialog_bg=0x7f070000;
-        public static final int dialog_btnfont=0x7f070001;
-        public static final int dialog_font=0x7f070002;
-        public static final int gray=0x7f07003c;
-        public static final int green=0x7f070045;
-        public static final int grey=0x7f070009;
+        public static final int dialog_bg=0x7f06001e;
+        public static final int dialog_bottom_bg=0x7f06002b;
+        public static final int dialog_btn=0x7f06002c;
+        public static final int dialog_btnfont=0x7f06004b;
+        public static final int dialog_divider_horizontal=0x7f06002d;
+        public static final int dialog_font=0x7f06004c;
+        public static final int dialog_head_bg=0x7f060029;
+        public static final int dialog_head_view_bg=0x7f06002a;
+        public static final int gray=0x7f06003e;
+        public static final int green=0x7f060047;
+        public static final int grey=0x7f060005;
         /**  透明色，注意不要用 #00000000, 在一些设备上可能会造成资源错乱 
+ 透明色，注意不要用 #00000000, 在一些设备上可能会造成资源错乱 
          */
-        public static final int grey_white=0x7f070039;
-        public static final int hanzi_color=0x7f07001e;
-        public static final int holo_blue_light=0x7f07001f;
-        public static final int home_bottom_view=0x7f07002c;
-        public static final int home_pop_bg=0x7f070024;
-        public static final int home_pop_text_bg=0x7f070022;
-        public static final int home_pop_text_press=0x7f070023;
-        public static final int item_divider=0x7f070012;
-        public static final int item_normal=0x7f07000e;
-        public static final int item_press=0x7f07000f;
-        public static final int ivory=0x7f07000b;
-        public static final int layout_bg=0x7f07002e;
-        public static final int light_gray=0x7f070042;
-        public static final int light_white=0x7f07003d;
-        public static final int light_white_new=0x7f070037;
-        public static final int light_yellow=0x7f070043;
-        public static final int list_divider=0x7f07003a;
-        public static final int listview_item_press=0x7f07002a;
-        public static final int listview_line_divider=0x7f070029;
-        public static final int local_share_on_off_text=0x7f070031;
-        public static final int local_video_controll_text=0x7f070030;
-        public static final int media_bg_color=0x7f07002f;
-        public static final int menu_text=0x7f070013;
-        public static final int music_time_gray=0x7f07003f;
-        public static final int orange=0x7f070046;
-        public static final int play_control_bg=0x7f070035;
+        public static final int grey_white=0x7f06003b;
+        public static final int hanzi_color=0x7f06001a;
+        public static final int holo_blue_light=0x7f06001b;
+        public static final int home_bottom_view=0x7f06002e;
+        public static final int home_pop_bg=0x7f060021;
+        public static final int home_pop_text_bg=0x7f06001f;
+        public static final int home_pop_text_press=0x7f060020;
+        public static final int item_divider=0x7f06000e;
+        public static final int item_normal=0x7f06000a;
+        public static final int item_press=0x7f06000b;
+        public static final int ivory=0x7f060007;
+        public static final int layout_bg=0x7f060030;
+        public static final int light_gray=0x7f060044;
+        public static final int light_white=0x7f06003f;
+        public static final int light_white_new=0x7f060039;
+        public static final int light_yellow=0x7f060045;
+        public static final int list_divider=0x7f06003c;
+        public static final int listview_item_press=0x7f060027;
+        public static final int listview_line_divider=0x7f060026;
+        public static final int local_share_on_off_text=0x7f060033;
+        public static final int local_video_controll_text=0x7f060032;
+        public static final int media_bg_color=0x7f060031;
+        public static final int menu_text=0x7f06000f;
+        public static final int music_time_gray=0x7f060041;
+        public static final int orange=0x7f060048;
+        public static final int play_control_bg=0x7f060037;
         /**  显示时间灰色 
+ 显示时间灰色 
          */
-        public static final int red=0x7f070040;
-        public static final int safe_mode_text=0x7f07002d;
-        public static final int setting_bg=0x7f070026;
-        public static final int setting_line_grey=0x7f070028;
-        public static final int setting_text_grey=0x7f070027;
-        public static final int silver=0x7f070047;
-        public static final int solid_blue=0x7f070017;
-        public static final int solid_green=0x7f070018;
-        public static final int solid_red=0x7f070016;
-        public static final int solid_yellow=0x7f070019;
-        public static final int tab_cursor=0x7f07002b;
-        public static final int text_content_color=0x7f07003e;
-        public static final int text_normal_color=0x7f07003b;
+        public static final int red=0x7f060042;
+        public static final int safe_mode_text=0x7f06002f;
+        public static final int setting_bg=0x7f060023;
+        public static final int setting_line_grey=0x7f060025;
+        public static final int setting_text_grey=0x7f060024;
+        public static final int silver=0x7f060049;
+        public static final int solid_blue=0x7f060013;
+        public static final int solid_green=0x7f060014;
+        public static final int solid_red=0x7f060012;
+        public static final int solid_yellow=0x7f060015;
+        public static final int tab_cursor=0x7f060028;
+        public static final int text_content_color=0x7f060040;
+        public static final int text_normal_color=0x7f06003d;
         /**  象牙色 
+ 象牙色 
          */
-        public static final int thumbnail_fg=0x7f07000c;
-        public static final int transparent=0x7f07000a;
-        public static final int video_header_btn=0x7f070011;
-        public static final int white=0x7f070014;
-        public static final int wk_color_none=0x7f070038;
+        public static final int thumbnail_fg=0x7f060008;
+        public static final int transparent=0x7f060006;
+        public static final int video_header_btn=0x7f06000d;
+        public static final int white=0x7f060010;
+        public static final int wk_color_none=0x7f06003a;
     }
     public static final class drawable {
         public static final int about=0x7f020000;
-        public static final int acctivitybg=0x7f020001;
-        public static final int appstart=0x7f020002;
-        public static final int back=0x7f020003;
-        public static final int background_tab=0x7f020004;
-        public static final int blue=0x7f02004a;
-        public static final int button_norm=0x7f020005;
-        public static final int button_pressed=0x7f020006;
-        public static final int com_progressbar_arrived_button_s=0x7f020007;
-        public static final int com_progressbar_arrived_button_uns=0x7f020008;
-        public static final int destory_1=0x7f020009;
-        public static final int destory_2=0x7f02000a;
-        public static final int device_connect=0x7f02000b;
-        public static final int dialog_line=0x7f02000c;
-        public static final int dialog_title=0x7f02000d;
-        public static final int editbox_bg_focused=0x7f02000e;
-        public static final int editbox_bg_normal=0x7f02000f;
-        public static final int green=0x7f02004b;
-        public static final int greenline=0x7f020010;
-        public static final int help1=0x7f020011;
-        public static final int help2=0x7f020012;
-        public static final int help3=0x7f020013;
-        public static final int help4=0x7f020014;
-        public static final int help_go_btn=0x7f020015;
-        public static final int help_go_btn_p=0x7f020016;
-        public static final int help_preview_btn=0x7f020017;
-        public static final int help_preview_btn_p=0x7f020018;
-        public static final int help_s=0x7f020019;
-        public static final int help_uns=0x7f02001a;
-        public static final int ic_launcher=0x7f02001b;
-        public static final int linbg=0x7f02001c;
-        public static final int linbghold=0x7f02001d;
-        public static final int line=0x7f02001e;
-        public static final int line_v=0x7f02001f;
-        public static final int mediacontroller_bg=0x7f020020;
-        public static final int mediacontroller_pause01=0x7f020021;
-        public static final int mediacontroller_pause02=0x7f020022;
-        public static final int mediacontroller_pause_button=0x7f020023;
-        public static final int mediacontroller_play01=0x7f020024;
-        public static final int mediacontroller_play02=0x7f020025;
-        public static final int mediacontroller_play_button=0x7f020026;
-        public static final int mediacontroller_seekbar01=0x7f020027;
-        public static final int mediacontroller_seekbar02=0x7f020028;
-        public static final int neterror=0x7f020029;
-        public static final int normal=0x7f02004d;
-        public static final int page_indicator=0x7f02002a;
-        public static final int page_indicator_focused=0x7f02002b;
-        public static final int red=0x7f020049;
+        public static final int appstart=0x7f020001;
+        public static final int back=0x7f020002;
+        public static final int background_tab=0x7f020003;
+        public static final int blue=0x7f020049;
+        public static final int button_norm=0x7f020004;
+        public static final int button_pressed=0x7f020005;
+        public static final int com_progressbar_arrived_button_s=0x7f020006;
+        public static final int com_progressbar_arrived_button_uns=0x7f020007;
+        public static final int destory_1=0x7f020008;
+        public static final int destory_2=0x7f020009;
+        public static final int device_connect=0x7f02000a;
+        public static final int dialog_line=0x7f02000b;
+        public static final int dialog_title=0x7f02000c;
+        public static final int editbox_bg_focused=0x7f02000d;
+        public static final int editbox_bg_normal=0x7f02000e;
+        public static final int green=0x7f02004a;
+        public static final int greenline=0x7f02000f;
+        public static final int help1=0x7f020010;
+        public static final int help2=0x7f020011;
+        public static final int help3=0x7f020012;
+        public static final int help4=0x7f020013;
+        public static final int help_go_btn=0x7f020014;
+        public static final int help_go_btn_p=0x7f020015;
+        public static final int help_preview_btn=0x7f020016;
+        public static final int help_preview_btn_p=0x7f020017;
+        public static final int help_s=0x7f020018;
+        public static final int help_uns=0x7f020019;
+        public static final int ic_launcher=0x7f02001a;
+        public static final int linbg=0x7f02001b;
+        public static final int linbghold=0x7f02001c;
+        public static final int line=0x7f02001d;
+        public static final int line_v=0x7f02001e;
+        public static final int mediacontroller_bg=0x7f02001f;
+        public static final int mediacontroller_pause01=0x7f020020;
+        public static final int mediacontroller_pause02=0x7f020021;
+        public static final int mediacontroller_pause_button=0x7f020022;
+        public static final int mediacontroller_play01=0x7f020023;
+        public static final int mediacontroller_play02=0x7f020024;
+        public static final int mediacontroller_play_button=0x7f020025;
+        public static final int mediacontroller_seekbar01=0x7f020026;
+        public static final int mediacontroller_seekbar02=0x7f020027;
+        public static final int neterror=0x7f020028;
+        public static final int normal=0x7f02004c;
+        public static final int page_indicator=0x7f020029;
+        public static final int page_indicator_focused=0x7f02002a;
+        public static final int red=0x7f020048;
         /**  黑色 
+ 黑色 
          */
-        public static final int screen_background_black=0x7f02004e;
-        public static final int screen_bg=0x7f02002c;
-        public static final int screen_bg_select=0x7f02002d;
-        public static final int scrubber_control_disabled_holo=0x7f02002e;
-        public static final int scrubber_control_focused_holo=0x7f02002f;
-        public static final int scrubber_control_normal_holo=0x7f020030;
-        public static final int scrubber_control_pressed_holo=0x7f020031;
-        public static final int scrubber_control_selector_holo=0x7f020032;
-        public static final int scrubber_primary_holo=0x7f020033;
-        public static final int scrubber_progress_horizontal_holo_dark=0x7f020034;
-        public static final int scrubber_secondary_holo=0x7f020035;
-        public static final int scrubber_track_holo_dark=0x7f020036;
-        public static final int setting=0x7f020037;
-        public static final int sidebar_background=0x7f020038;
-        public static final int thumb_button=0x7f020039;
-        public static final int thumb_destorypreview=0x7f02003a;
-        public static final int thumb_dialogbutton=0x7f02003b;
-        public static final int thumb_dot=0x7f02003c;
-        public static final int thumb_edittext=0x7f02003d;
-        public static final int thumb_floatingbg=0x7f02003e;
-        public static final int thumb_help_gobtn=0x7f02003f;
-        public static final int thumb_listviewitem=0x7f020040;
-        public static final int thumb_netconnect=0x7f020041;
-        public static final int thumb_pjimageview_bg=0x7f020042;
-        public static final int thumb_progressbar=0x7f020043;
-        public static final int thumb_seekbar_style=0x7f020044;
-        public static final int thumb_videoview=0x7f020045;
-        public static final int top_titlebg=0x7f020046;
-        public static final int translucent_background=0x7f02004f;
-        public static final int transparent_background=0x7f020050;
-        public static final int unconnect=0x7f020047;
-        public static final int voip_toast_bg=0x7f020048;
-        public static final int yellow=0x7f02004c;
+        public static final int screen_background_black=0x7f02004d;
+        public static final int screen_bg=0x7f02002b;
+        public static final int screen_bg_select=0x7f02002c;
+        public static final int scrubber_control_disabled_holo=0x7f02002d;
+        public static final int scrubber_control_focused_holo=0x7f02002e;
+        public static final int scrubber_control_normal_holo=0x7f02002f;
+        public static final int scrubber_control_pressed_holo=0x7f020030;
+        public static final int scrubber_control_selector_holo=0x7f020031;
+        public static final int scrubber_primary_holo=0x7f020032;
+        public static final int scrubber_progress_horizontal_holo_dark=0x7f020033;
+        public static final int scrubber_secondary_holo=0x7f020034;
+        public static final int scrubber_track_holo_dark=0x7f020035;
+        public static final int setting=0x7f020036;
+        public static final int sidebar_background=0x7f020037;
+        public static final int thumb_button=0x7f020038;
+        public static final int thumb_destorypreview=0x7f020039;
+        public static final int thumb_dialogbutton=0x7f02003a;
+        public static final int thumb_dot=0x7f02003b;
+        public static final int thumb_edittext=0x7f02003c;
+        public static final int thumb_floatingbg=0x7f02003d;
+        public static final int thumb_help_gobtn=0x7f02003e;
+        public static final int thumb_listviewitem=0x7f02003f;
+        public static final int thumb_netconnect=0x7f020040;
+        public static final int thumb_pjimageview_bg=0x7f020041;
+        public static final int thumb_progressbar=0x7f020042;
+        public static final int thumb_seekbar_style=0x7f020043;
+        public static final int thumb_videoview=0x7f020044;
+        public static final int top_titlebg=0x7f020045;
+        public static final int translucent_background=0x7f02004e;
+        public static final int transparent_background=0x7f02004f;
+        public static final int unconnect=0x7f020046;
+        public static final int voip_toast_bg=0x7f020047;
+        public static final int yellow=0x7f02004b;
     }
     public static final class id {
         public static final int DialogBut_cancel=0x7f0a0018;
@@ -397,78 +407,88 @@ containing a value of this type.
         public static final int dingdong=0x7f050001;
     }
     public static final class string {
-        public static final int RGBsetting=0x7f08000e;
-        public static final int about_ok=0x7f08000a;
-        public static final int about_summary=0x7f080004;
-        public static final int about_title=0x7f080002;
-        public static final int about_version=0x7f080003;
-        public static final int adjustBacklight=0x7f08000c;
-        public static final int adjustPicmode=0x7f08000d;
-        public static final int app_name=0x7f080000;
-        public static final int app_title=0x7f080001;
-        public static final int backlight_adj=0x7f080031;
-        public static final int brightness=0x7f080012;
-        public static final int buffering=0x7f080036;
-        public static final int colorB=0x7f080011;
-        public static final int colorG=0x7f080010;
-        public static final int colorR=0x7f08000f;
-        public static final int color_adjust=0x7f080025;
-        public static final int color_cold=0x7f08002e;
-        public static final int color_manual=0x7f080030;
-        public static final int color_warm=0x7f08002f;
-        public static final int contrast=0x7f080013;
-        public static final int dev_title=0x7f08000b;
-        public static final int device_connect=0x7f080016;
-        public static final int device_connect_close=0x7f080018;
-        public static final int device_connect_err=0x7f080019;
-        public static final int device_connect_fail=0x7f080017;
-        public static final int exit=0x7f08001c;
-        public static final int exitdialog_infor=0x7f080035;
-        public static final int exitdialog_title=0x7f080034;
-        public static final int line=0x7f08001f;
-        public static final int mediacontroller_play_pause=0x7f080041;
-        public static final int net_err=0x7f08001a;
-        public static final int net_err_title=0x7f08001b;
-        public static final int netconnect=0x7f080039;
-        public static final int netconnectinfor=0x7f08003a;
-        public static final int pic_mode=0x7f080024;
-        public static final int picmode_dynamic=0x7f08002c;
-        public static final int picmode_manual=0x7f08002d;
-        public static final int picmode_standard=0x7f08002b;
-        public static final int pj_rxc=0x7f080022;
-        public static final int pj_source=0x7f080023;
-        public static final int port_close=0x7f080021;
-        public static final int quit=0x7f080038;
-        public static final int select_screen=0x7f08001d;
-        public static final int set_column=0x7f080008;
-        public static final int set_row=0x7f080007;
-        public static final int set_sleep=0x7f080032;
-        public static final int set_submit=0x7f080009;
-        public static final int set_wake=0x7f080033;
-        public static final int sharpness=0x7f080015;
-        public static final int source_pj_cvbs=0x7f08002a;
-        public static final int source_pj_dvi=0x7f080026;
-        public static final int source_pj_hdmi=0x7f080027;
-        public static final int source_pj_vga=0x7f080029;
-        public static final int source_pj_ypbpr=0x7f080028;
-        public static final int submit=0x7f080037;
-        public static final int text_column=0x7f080006;
-        public static final int text_row=0x7f080005;
-        public static final int tone=0x7f080014;
-        public static final int vitamio_init_decoders=0x7f08003c;
-        public static final int vitamio_name=0x7f08003b;
-        public static final int vitamio_videoview_error_button=0x7f080040;
-        public static final int vitamio_videoview_error_text_invalid_progressive_playback=0x7f08003e;
-        public static final int vitamio_videoview_error_text_unknown=0x7f08003f;
-        public static final int vitamio_videoview_error_title=0x7f08003d;
-        public static final int warning=0x7f08001e;
-        public static final int write_fail=0x7f080020;
+        public static final int RGBsetting=0x7f070015;
+        public static final int about_ok=0x7f070011;
+        public static final int about_summary=0x7f07000b;
+        public static final int about_title=0x7f070009;
+        public static final int about_version=0x7f07000a;
+        public static final int adjustBacklight=0x7f070013;
+        public static final int adjustPicmode=0x7f070014;
+        public static final int app_name=0x7f070007;
+        public static final int app_title=0x7f070008;
+        public static final int backlight_adj=0x7f070038;
+        public static final int brightness=0x7f070019;
+        public static final int buffering=0x7f07003d;
+        public static final int colorB=0x7f070018;
+        public static final int colorG=0x7f070017;
+        public static final int colorR=0x7f070016;
+        public static final int color_adjust=0x7f07002c;
+        public static final int color_cold=0x7f070035;
+        public static final int color_manual=0x7f070037;
+        public static final int color_warm=0x7f070036;
+        public static final int contrast=0x7f07001a;
+        public static final int dev_title=0x7f070012;
+        public static final int device_connect=0x7f07001d;
+        public static final int device_connect_close=0x7f07001f;
+        public static final int device_connect_err=0x7f070020;
+        public static final int device_connect_fail=0x7f07001e;
+        public static final int exit=0x7f070023;
+        public static final int exitdialog_infor=0x7f07003c;
+        public static final int exitdialog_title=0x7f07003b;
+        public static final int line=0x7f070026;
+        public static final int mediacontroller_play_pause=0x7f070006;
+        public static final int net_err=0x7f070021;
+        public static final int net_err_title=0x7f070022;
+        public static final int netconnect=0x7f070040;
+        public static final int netconnectinfor=0x7f070041;
+        public static final int pic_mode=0x7f07002b;
+        public static final int picmode_dynamic=0x7f070033;
+        public static final int picmode_manual=0x7f070034;
+        public static final int picmode_standard=0x7f070032;
+        public static final int pj_rxc=0x7f070029;
+        public static final int pj_source=0x7f07002a;
+        public static final int port_close=0x7f070028;
+        public static final int quit=0x7f07003f;
+        public static final int select_screen=0x7f070024;
+        public static final int set_column=0x7f07000f;
+        public static final int set_row=0x7f07000e;
+        public static final int set_sleep=0x7f070039;
+        public static final int set_submit=0x7f070010;
+        public static final int set_wake=0x7f07003a;
+        public static final int sharpness=0x7f07001c;
+        public static final int source_pj_cvbs=0x7f070031;
+        public static final int source_pj_dvi=0x7f07002d;
+        public static final int source_pj_hdmi=0x7f07002e;
+        public static final int source_pj_vga=0x7f070030;
+        public static final int source_pj_ypbpr=0x7f07002f;
+        public static final int submit=0x7f07003e;
+        public static final int text_column=0x7f07000d;
+        public static final int text_row=0x7f07000c;
+        public static final int tone=0x7f07001b;
+        public static final int vitamio_init_decoders=0x7f070001;
+        public static final int vitamio_name=0x7f070000;
+        public static final int vitamio_videoview_error_button=0x7f070005;
+        public static final int vitamio_videoview_error_text_invalid_progressive_playback=0x7f070003;
+        public static final int vitamio_videoview_error_text_unknown=0x7f070004;
+        public static final int vitamio_videoview_error_title=0x7f070002;
+        public static final int warning=0x7f070025;
+        public static final int write_fail=0x7f070027;
     }
     public static final class style {
         /** 
+        Base application theme for API 11+. This theme completely replaces
+        AppBaseTheme from res/values/styles.xml on API 11+ devices.
+    
+ API 11 theme customizations can go here. 
+
+        Base application theme for API 14+. This theme completely replaces
+        AppBaseTheme from BOTH res/values/styles.xml and
+        res/values-v11/styles.xml on API 14+ devices.
+    
+ API 14 theme customizations can go here. 
+
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-
 
     
 
@@ -476,19 +496,18 @@ containing a value of this type.
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
 
-
         
          */
-        public static final int AppBaseTheme=0x7f090000;
-        public static final int MediaButton=0x7f090001;
-        public static final int MediaButton_Ffwd=0x7f090005;
-        public static final int MediaButton_Next=0x7f090003;
-        public static final int MediaButton_Pause=0x7f090007;
-        public static final int MediaButton_Play=0x7f090004;
-        public static final int MediaButton_Previous=0x7f090002;
-        public static final int MediaButton_Rew=0x7f090006;
-        public static final int MediaController_SeekBar=0x7f090008;
-        public static final int MediaController_Text=0x7f090009;
+        public static final int AppBaseTheme=0x7f080002;
+        public static final int MediaButton=0x7f080003;
+        public static final int MediaButton_Ffwd=0x7f080007;
+        public static final int MediaButton_Next=0x7f080005;
+        public static final int MediaButton_Pause=0x7f080009;
+        public static final int MediaButton_Play=0x7f080006;
+        public static final int MediaButton_Previous=0x7f080004;
+        public static final int MediaButton_Rew=0x7f080008;
+        public static final int MediaController_SeekBar=0x7f080000;
+        public static final int MediaController_Text=0x7f080001;
     }
     public static final class styleable {
         /** Attributes that can be used with a PagerSlidingTabStrip.

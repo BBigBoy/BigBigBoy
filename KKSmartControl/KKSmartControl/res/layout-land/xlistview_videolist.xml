@@ -25,7 +25,7 @@
         android:textSize="30.0dip"
         android:visibility="invisible" />
 
-    <com.xlistview.sidebar.SideBar
+    <com.xlistview.handle.SideBar
         android:id="@+id/sidrbar"
         android:layout_width="20.0dip"
         android:layout_height="wrap_content"

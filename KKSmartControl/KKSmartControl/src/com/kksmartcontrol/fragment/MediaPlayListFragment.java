@@ -11,9 +11,9 @@ import com.example.kksmartcontrol.R;
 import com.xlistview.adapter.PlayListAdapter;
 import com.xlistview.handle.CharacterParser;
 import com.xlistview.handle.PinyinComparator;
+import com.xlistview.handle.SideBar;
+import com.xlistview.handle.SideBar.OnTouchingLetterChangedListener;
 import com.xlistview.model.PlayListItemModel;
-import com.xlistview.sidebar.SideBar;
-import com.xlistview.sidebar.SideBar.OnTouchingLetterChangedListener;
 import com.xlistview.xlistview.XListView;
 import com.xlistview.xlistview.XListView.IXListViewListener;
 import com.xml.sax.SaxService;
@@ -35,6 +35,7 @@ import android.view.View.OnDragListener;
 import android.view.ViewGroup;
 import android.view.View.DragShadowBuilder;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -215,7 +216,6 @@ public class MediaPlayListFragment extends Fragment implements
 		AssetManager assetManager = getResources().getAssets();
 		try {
 			InputStream inputStream = assetManager.open("videoList.xml");
-
 			// InputStream inputStream = new FileInputStream(path);
 			List<HashMap<String, String>> list = SaxService.readXML(
 					inputStream, "video");
