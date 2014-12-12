@@ -2,9 +2,8 @@ package com.kksmartcontrol.floatwindow;
 
 import com.example.kksmartcontrol.R;
 import com.glh.montagecontrol.net.client.NetState;
-import com.kksmartcontrol.dialog.AboutDialog; 
-import com.kksmartcontrol.net.NetWorkObject;
-
+import com.kksmartcontrol.dialogfragment.AboutDialog;
+import com.kksmartcontrol.net.NetWorkFragment;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -106,8 +105,8 @@ public class PlusFloatWindow extends LinearLayout {
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			if (NetWorkObject.getInstance().getNetStatus() != NetState.TCP_CONN_OPEN) {
-				NetWorkObject.getInstance().connectToServer();
+			if (NetWorkFragment.getNetStatus() != NetState.TCP_CONN_OPEN) {
+				NetWorkFragment.connectToServer();
 				return true;
 			}
 			if (floatView.getVisibility() == View.VISIBLE) {

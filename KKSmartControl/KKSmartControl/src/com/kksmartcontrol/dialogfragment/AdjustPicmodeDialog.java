@@ -1,4 +1,4 @@
-package com.kksmartcontrol.dialog;
+package com.kksmartcontrol.dialogfragment;
 
 import java.lang.ref.WeakReference;
 
@@ -11,12 +11,12 @@ import com.kksmartcontrol.netcmd.SetPJ_Infor;
 import com.kksmartcontrol.preference.PreferencesUtils;
 
 import android.app.AlertDialog;
-import android.app.Dialog; 
+import android.app.Dialog;  
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock; 
+import android.os.SystemClock;  
 import android.support.v4.app.DialogFragment;
 import android.util.Log; 
 import android.view.View;

@@ -1,7 +1,9 @@
 package com.kksmartcontrol.activity;
 
 import com.example.kksmartcontrol.R;
+import com.kksmartcontrol.bean.KKSmartControlDataBean;
 import com.kksmartcontrol.preference.MySharedPreferences;
+import com.kksmartcontrol.preference.PreferencesUtils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -50,10 +52,11 @@ public class SplashActivity extends Activity {
 				}, 500);
 			}
 		});
-	}
 
-	protected void onResume() {
-		super.onResume();
+		KKSmartControlDataBean.setRowNum(PreferencesUtils.getInt(this,
+				"rowNum", 2));
+		KKSmartControlDataBean.setColumnNum(PreferencesUtils.getInt(this,
+				"columnNum", 2));
 	}
 
 	private void goHome() {

@@ -1,4 +1,4 @@
-package com.kksmartcontrol.dialog;
+package com.kksmartcontrol.dialogfragment;
 
 import java.lang.ref.WeakReference;
 

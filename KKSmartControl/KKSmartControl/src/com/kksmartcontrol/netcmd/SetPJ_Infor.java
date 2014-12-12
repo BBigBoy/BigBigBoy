@@ -5,14 +5,14 @@ import com.glh.montagecontrol.net.client.NetClient;
 import com.glh.montagecontrol.net.packet.CommandPacket;
 import com.kksmartcontrol.bean.Coordinate;
 import com.kksmartcontrol.bean.KKSmartControlDataBean;
-import com.kksmartcontrol.net.NetWorkObject;
+import com.kksmartcontrol.net.NetWorkFragment;
 import com.kksmartcontrol.net.ParameDataHandle;
 import com.kksmartcontrol.net.ParameDataHandle.SystemFuntion;
 
 public class SetPJ_Infor {
 
 	ParameDataHandle parameData = new ParameDataHandle();
-	NetClient netclient = NetWorkObject.getInstance().getNetClient();
+	NetClient netclient = NetWorkFragment.getNetClient();
 
 	private static class SetPJ_InforHolder {
 		public final static SetPJ_Infor instance = new SetPJ_Infor();

@@ -1,9 +1,7 @@
-package com.kksmartcontrol.dialog;
+package com.kksmartcontrol.dialogfragment;
 
 import com.example.kksmartcontrol.R;
 import com.kksmartcontrol.dialog.util.DialogUtil;
-import com.kksmartcontrol.net.NetWorkObject;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -49,9 +47,7 @@ public class ExitDialog extends DialogFragment implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.DialogBut_ok:
 			this.dismiss();
-			((Activity) context).finish();
-			// 网络模块反初始化应放在Activity结束以后
-			NetWorkObject.getInstance().unInitNetClient();
+			((Activity) context).finish(); 
 			// android.os.Process.killProcess(android.os.Process.myPid()); //
 			// 获取PID
 			// System.exit(0); // 常规java、c#的标准退出法，返回值为0代表正常退出

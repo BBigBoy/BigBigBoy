@@ -3,13 +3,13 @@ package com.kksmartcontrol.fragment;
 import com.example.kksmartcontrol.R;
 import com.glh.montagecontrol.net.client.NetState;
 import com.kksmartcontrol.bean.KKSmartControlDataBean;
-import com.kksmartcontrol.dialog.AdjustPicmodeDialog;
-import com.kksmartcontrol.dialog.AdjustRGBDialog;
-import com.kksmartcontrol.dialog.BacklightDialog;
-import com.kksmartcontrol.net.NetWorkObject;
+import com.kksmartcontrol.dialogfragment.AdjustPicmodeDialog;
+import com.kksmartcontrol.dialogfragment.AdjustRGBDialog;
+import com.kksmartcontrol.dialogfragment.BacklightDialog;
+import com.kksmartcontrol.net.NetWorkFragment;
 import com.kksmartcontrol.net.ParameDataHandle.SystemFuntion;
 import com.kksmartcontrol.netcmd.SetPJ_Infor;
-import com.kksmartcontrol.util.EditText_KeyListener; 
+import com.kksmartcontrol.util.EditText_KeyListener;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -46,8 +46,7 @@ public class ControlSettingFragment extends Fragment implements OnClickListener 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.rigtht_screen_control, container,
-				false);
+		View view = inflater.inflate(R.layout.controlsetting, container, false);
 		return view;
 	}
 
@@ -65,7 +64,7 @@ public class ControlSettingFragment extends Fragment implements OnClickListener 
 		setColumn = (EditText) view.findViewById(R.id.edit_column);
 		// Edit_Text输入完成后判断字符是否合法，并作出相应处理
 		setRow.setOnKeyListener(new EditText_KeyListener(context));
-		setColumn.setOnKeyListener(new EditText_KeyListener(context)); 
+		setColumn.setOnKeyListener(new EditText_KeyListener(context));
 		setRow.setText(String.valueOf(KKSmartControlDataBean.getRowNum()));
 		setColumn
 				.setText(String.valueOf(KKSmartControlDataBean.getColumnNum()));
@@ -85,7 +84,7 @@ public class ControlSettingFragment extends Fragment implements OnClickListener 
 			return;
 		}
 		// 每次点击按钮均判断网络是否连接正常
-		if (NetWorkObject.getInstance().getNetStatus() != NetState.TCP_CONN_OPEN) {
+		if (NetWorkFragment.getNetStatus() != NetState.TCP_CONN_OPEN) {
 			Toast.makeText(context, "当前未与服务器正常连接，请连接！", Toast.LENGTH_SHORT)
 					.show();
 			return;
@@ -123,10 +122,8 @@ public class ControlSettingFragment extends Fragment implements OnClickListener 
 					(byte) 0x00, (byte) 0x04);
 			break;
 		case R.id.picmode_manual:
-			// showMyDialog(R.layout.adjustpicmodedialog);
 			new AdjustPicmodeDialog().show(getFragmentManager(),
 					"PicModeManualSet");
-
 			break;
 		case R.id.color_cold:
 			setPJ_Infor.adjustColorMode(
@@ -172,8 +169,8 @@ public class ControlSettingFragment extends Fragment implements OnClickListener 
 		int columnNum = Integer.parseInt(setColumn.getText().toString());
 
 		KKSmartControlDataBean.setRowNum(rowNum);
-		KKSmartControlDataBean.setColumnNum(columnNum); 
-	
+		KKSmartControlDataBean.setColumnNum(columnNum);
+
 		if (PJDiaplayFragment.pjDiaplayFragment.isHidden()) {
 
 			FragmentTransaction fragmentTransaction = getActivity()

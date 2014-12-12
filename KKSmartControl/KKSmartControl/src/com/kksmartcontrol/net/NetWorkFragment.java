@@ -1,6 +1,5 @@
 package com.kksmartcontrol.net;
 
-import java.lang.ref.WeakReference;
 import java.net.SocketAddress;
 
 import com.example.kksmartcontrol.R;
@@ -9,11 +8,13 @@ import com.glh.montagecontrol.net.client.NetClient;
 import com.glh.montagecontrol.net.client.NetState;
 import com.glh.montagecontrol.net.packet.CommandPacketAck;
 import com.glh.montagecontrol.net.packet.IPacket;
-import com.kksmartcontrol.activity.MainActivity;
-import com.kksmartcontrol.dialog.ConnectServerDialog;
-import com.kksmartcontrol.dialog.NetErrDialog;
+import com.kksmartcontrol.dialogfragment.ConnectServerDialog;
+import com.kksmartcontrol.dialogfragment.NetErrDialog;
 import com.kksmartcontrol.floatwindow.MyWindowManager;
-
+import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -22,136 +23,55 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
-public class NetWorkObject implements INetDoer {
+public class NetWorkFragment extends Fragment implements INetDoer {
 	String TAG = this.getClass().getName();
 	/**
-	 * // 网络状态表示，全局只应该有一个，其余通过引用传递
+	 * // 网络状态标识，全局只应该有一个，其余通过引用传递
 	 */
-	NetState netState = NetState.NET_STATUS_ERR;
+	static NetState netState;
 	/**
 	 * // 网络连接客户端，全局只应该有一个，其余通过引用传递
 	 */
-	NetClient netclient = new NetClient();
+	static NetClient netclient = null;
 	/**
 	 * // 标识是否正在处理网络请求，true为正在处理，不接受其他网络请求
 	 */
-	Boolean workState = false;
+	static Boolean workState;
 
-	/**
-	 * 此上下文对象将在Activity的oncreate中执行，由于手势切换中先生成新的activity，后销毁，因此不会出现null的情况，
-	 * 也不用去ondestory中置空
-	 */
-	public static Context context = null;
+	public static Context context;
 
-	private MyHandler mHandler = new MyHandler();
+	private static MyHandler mHandler = new MyHandler();
 
-	private static class MyHandler extends Handler {
-		// 记录网络重连次数,重连3次连接不上就放弃重连
-		int reConnectTime = 0;
-		ConnectServerDialog connectServerDialog = null;
-
-		@Override
-		public void handleMessage(Message msg) {
-			super.handleMessage(msg);
-			MainActivity activity = new WeakReference<MainActivity>(
-					(MainActivity) context).get();
-			NetWorkObject netWorkObject = NetWorkObject.getInstance();
-			// 接收到一次网络事件即认为上一次任务已完成
-			netWorkObject.workState = false;
-
-			if (activity != null) {
-				switch (msg.what) {
-				case 1://
-					if (connectServerDialog == null) {
-						connectServerDialog = new ConnectServerDialog();
-					}
-					connectServerDialog.show(activity.getFragmentManager(),
-							"ConServer");
-					break;
-				case 2:// tcp connect
-						// TopTitleFragment.setDeviceConnectState(true);
-					MyWindowManager.setNetState(true);
-					// 关闭正在连接网络对话框
-					if (connectServerDialog != null) {
-						reConnectTime = 0;
-						connectServerDialog.dismiss();
-						connectServerDialog = null;
-					}
-
-					// 关闭网络错误对话框
-					NetErrDialog netErrDialog2 = (NetErrDialog) activity
-							.getFragmentManager().findFragmentByTag("NetErr");
-					if (netErrDialog2 != null)
-						netErrDialog2.dismiss();
-
-					Log.i(activity.TAG, "tcp connect");
-					Toast.makeText(activity, R.string.device_connect,
-							Toast.LENGTH_SHORT).show();
-					break;
-				case 3:// tcp connect err主动连接未成功
-						// TopTitleFragment.setDeviceConnectState(false);
-					MyWindowManager.setNetState(false);
-					Toast.makeText(activity,
-							"第" + (reConnectTime + 1) + "次" + "设备连接失败了!",
-							Toast.LENGTH_SHORT).show();
-
-					if ((reConnectTime++ < 2)) {
-						netWorkObject.connectDev();
-						netWorkObject.workState = true;
-						Log.i(activity.TAG, activity.TAG + "reConnectTime33---"
-								+ reConnectTime);
-					} else {
-						reConnectTime = 0;
-						if (connectServerDialog != null)
-							connectServerDialog.dismiss();
-					}
-
-					break;
-				case 4:// tcp connect close
-						// TopTitleFragment.setDeviceConnectState(false);
-					MyWindowManager.setNetState(false);
-					Toast.makeText(activity, R.string.device_connect_close,
-							Toast.LENGTH_SHORT).show();
-					break;
-				case 5:// tcp err
-						// TopTitleFragment.setDeviceConnectState(false);
-					MyWindowManager.setNetState(false);
-					NetErrDialog netErrDialog = (NetErrDialog) activity
-							.getFragmentManager().findFragmentByTag("NetErr");
-					if (netErrDialog == null) {
-						new NetErrDialog().show(activity.getFragmentManager(),
-								"NetErr");
-					} else if (!netErrDialog.isVisible()) {
-						netErrDialog.show(activity.getFragmentManager(),
-								"NetErr");
-						Log.i(activity.TAG, activity.TAG + "edfhnngf");
-					}
-					break;
-				default:
-					break;
-				}
-			}
-		}
-	}
-
-	private static class NetWorkObjectHolder {
-		public final static NetWorkObject instance = new NetWorkObject();
-	}
-
-	// 设计单例模式
-	public static NetWorkObject getInstance() {
-		return NetWorkObjectHolder.instance;
-	}
-
-	private NetWorkObject() {
-		Log.d(TAG, "NetWorkObject");
+	@Override
+	public void onAttach(Activity activity) {
+		// TODO Auto-generated method stub
+		super.onAttach(activity);
+		context = getActivity();
+		netState = NetState.NET_STATUS_ERR;
+		netclient = new NetClient();
+		workState = false;
 		initNetClient();
+	}
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MyWindowManager.setNetState(false);
+		connectToServer();
+	}
+
+	@Override
+	public void onDetach() {
+		// TODO Auto-generated method stub
+		unInitNetClient();
+		super.onDetach();
 	}
 
 	/**
 	 * 连接服务器
 	 */
-	public void connectToServer() {
+	public static void connectToServer() {
 		if (netState != NetState.TCP_CONN_OPEN) {
 			if (!judgeNetConfig(context))// 网络状态错误即不进行后面判断
 				return;
@@ -177,7 +97,7 @@ public class NetWorkObject implements INetDoer {
 	 * @param context
 	 * @return
 	 */
-	public boolean judgeNetConfig(Context context) {
+	public static boolean judgeNetConfig(Context context) {
 
 		ConnectivityManager con = (ConnectivityManager) context
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -215,7 +135,7 @@ public class NetWorkObject implements INetDoer {
 	/**
 	 * 网络断开后重连时调用
 	 */
-	public void connectDev() {
+	public static void connectDev() {
 
 		netclient.connectDev();
 	}
@@ -231,7 +151,7 @@ public class NetWorkObject implements INetDoer {
 	/**
 	 * @return 返回当前与服务器连接状态
 	 */
-	public NetState getNetStatus() {
+	public static NetState getNetStatus() {
 
 		return netState;
 	}
@@ -239,7 +159,7 @@ public class NetWorkObject implements INetDoer {
 	/**
 	 * @return 返回当前与服务器连接客户端对象
 	 */
-	public NetClient getNetClient() {
+	public static NetClient getNetClient() {
 
 		return netclient;
 	}
@@ -317,6 +237,94 @@ public class NetWorkObject implements INetDoer {
 			return false;
 		}
 		return false;
+	}
+
+	public static void dismissDialog(Context context, String tag) {
+		DialogFragment dialog = (DialogFragment) ((Activity) context)
+				.getFragmentManager().findFragmentByTag(tag);
+		if (dialog != null) {
+			dialog.dismiss();
+			Log.i("dismissDialog", "dismissDialog---->" + tag);
+		}
+		Log.i("dismissDialog", "dismissDialog---->" + "null");
+	}
+
+	public static void showDialog(Context context, String tag) {
+		DialogFragment dialogFragment = (DialogFragment) ((Activity) context)
+				.getFragmentManager().findFragmentByTag(tag);
+		if (dialogFragment == null) {
+			if (tag == "NetErr")
+				new NetErrDialog().show(
+						((Activity) context).getFragmentManager(), tag);
+			else if (tag == "ConServer")
+				new ConnectServerDialog().show(
+						((Activity) context).getFragmentManager(), tag);
+			Log.i("showDialog", "showDialog---->" + tag);
+		} else if (!dialogFragment.isVisible()) {
+			FragmentTransaction fragmentTransaction = ((Activity) context)
+					.getFragmentManager().beginTransaction();
+			fragmentTransaction.show(dialogFragment);
+			fragmentTransaction.commit();
+			Log.i("showDialog---!dialogFragment.isVisible()", "showDialog---->"
+					+ tag);
+		}
+
+	}
+
+	private static class MyHandler extends Handler {
+		// 记录网络重连次数,重连3次连接不上就放弃重连
+		int reConnectTime = 0;
+
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			switch (msg.what) {
+			case 1://
+				showDialog(context, "ConServer");
+				break;
+			case 2:// tcp connect
+					// TopTitleFragment.setDeviceConnectState(true);
+				MyWindowManager.setNetState(true);
+				reConnectTime = 0;
+
+				dismissDialog(context, "ConServer");
+				dismissDialog(context, "NetErr");
+
+				Toast.makeText(context, R.string.device_connect,
+						Toast.LENGTH_SHORT).show();
+				break;
+			case 3:// tcp connect err主动连接未成功
+					// TopTitleFragment.setDeviceConnectState(false);
+				MyWindowManager.setNetState(false);
+				Toast.makeText(context,
+						"第" + (reConnectTime + 1) + "次" + "设备连接失败了!",
+						Toast.LENGTH_SHORT).show();
+
+				if ((reConnectTime++ < 2)) {
+					connectDev();
+					NetWorkFragment.workState = true;
+				} else {
+					reConnectTime = 0;
+					dismissDialog(context, "ConServer");
+				}
+				break;
+			case 4:// tcp connect close
+					// TopTitleFragment.setDeviceConnectState(false);
+				MyWindowManager.setNetState(false);
+				Toast.makeText(context, R.string.device_connect_close,
+						Toast.LENGTH_SHORT).show();
+				break;
+			case 5:// tcp err
+					// TopTitleFragment.setDeviceConnectState(false);
+				MyWindowManager.setNetState(false);
+
+				showDialog(context, "NetErr");
+				break;
+			default:
+				break;
+			}
+		}
+
 	}
 
 }

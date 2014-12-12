@@ -1,14 +1,13 @@
 package com.kksmartcontrol.activity;
 
 import com.example.kksmartcontrol.R;
-import com.glh.montagecontrol.net.client.NetState;
 import com.kksmartcontrol.bean.KKSmartControlDataBean;
-import com.kksmartcontrol.dialog.ExitDialog;
+import com.kksmartcontrol.dialogfragment.ExitDialog;
 import com.kksmartcontrol.floatwindow.MyWindowManager;
 import com.kksmartcontrol.fragment.ControlSettingFragment;
 import com.kksmartcontrol.fragment.MediaPlayListFragment;
 import com.kksmartcontrol.fragment.PJDiaplayFragment;
-import com.kksmartcontrol.net.NetWorkObject;
+import com.kksmartcontrol.net.NetWorkFragment;
 import com.kksmartcontrol.pagersliding.PagerSlidingTabStrip;
 import com.kksmartcontrol.preference.PreferencesUtils;
 
@@ -40,7 +39,7 @@ public class MainActivity extends FragmentActivity {
 	/**
 	 * 获取当前屏幕的密度
 	 */
-	private DisplayMetrics dm;
+	private DisplayMetrics displayMetrics;
 
 	FragmentTransaction fragmentTransaction;
 
@@ -50,20 +49,15 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_main);
-		NetWorkObject.context = this;
-
-		KKSmartControlDataBean.setRowNum(PreferencesUtils.getInt(this,
-				"rowNum", 2));
-		KKSmartControlDataBean.setColumnNum(PreferencesUtils.getInt(this,
-				"columnNum", 2));
-
 		fragmentTransaction = getFragmentManager().beginTransaction();
 
 		PJDiaplayFragment pjDiaplayFragment = new PJDiaplayFragment();
 		fragmentTransaction.replace(R.id.videodisplay, pjDiaplayFragment);
+		// 添加管理网络连接的fragment
+		fragmentTransaction.add(new NetWorkFragment(), "network");
 		fragmentTransaction.commit();
 
-		dm = getResources().getDisplayMetrics();
+		displayMetrics = getResources().getDisplayMetrics();
 		ViewPager pager = (ViewPager) findViewById(R.id.pager);
 		tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 		pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
@@ -74,25 +68,14 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	@Override
-	protected void onStart() {
-		// TODO Auto-generated method stub
-		super.onStart();
-
-		if (NetWorkObject.getInstance().getNetStatus() == NetState.TCP_CONN_OPEN) {
-			// device_con.setSelected(true);
-			// MyWindowManager.setNetState(true);
-		} else {
-			// device_con.setSelected(false);
-			MyWindowManager.setNetState(false);
-			NetWorkObject.getInstance().connectToServer();
-		}
-
-	}
-
-	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		// if (NetWorkObject.getInstance().getNetStatus() !=
+		// NetState.TCP_CONN_OPEN) {
+		// MyWindowManager.setNetState(false);
+		// NetWorkObject.getInstance().connectToServer();
+		// }
 		// 显示悬浮窗
 		MyWindowManager.displayPlusFloatWindow();
 	}
@@ -107,7 +90,7 @@ public class MainActivity extends FragmentActivity {
 		// 隐藏悬浮窗
 		MyWindowManager.hidePlusFloatWindow();
 		super.onPause();
-	} 
+	}
 
 	@Override
 	protected void onDestroy() {
@@ -132,13 +115,13 @@ public class MainActivity extends FragmentActivity {
 		tabs.setDividerColor(Color.TRANSPARENT);
 		// 设置Tab底部线的高度
 		tabs.setUnderlineHeight((int) TypedValue.applyDimension(
-				TypedValue.COMPLEX_UNIT_DIP, 1, dm));
+				TypedValue.COMPLEX_UNIT_DIP, 1, displayMetrics));
 		// 设置Tab Indicator的高度
 		tabs.setIndicatorHeight((int) (TypedValue.applyDimension(
-				TypedValue.COMPLEX_UNIT_DIP, 2, dm) / 1.5));
+				TypedValue.COMPLEX_UNIT_DIP, 2, displayMetrics) / 1.5));
 		// 设置Tab标题文字的大小
 		tabs.setTextSize((int) TypedValue.applyDimension(
-				TypedValue.COMPLEX_UNIT_SP, 16, dm));
+				TypedValue.COMPLEX_UNIT_SP, 16, displayMetrics));
 		// 设置Tab Indicator的颜色
 		tabs.setIndicatorColor(Color.parseColor("#45c01a"));
 		// 设置选中Tab文字的颜色 (这是我自定义的一个方法)
