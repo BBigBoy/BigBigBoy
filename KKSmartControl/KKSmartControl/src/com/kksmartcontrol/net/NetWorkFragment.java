@@ -18,6 +18,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -54,9 +55,9 @@ public class NetWorkFragment extends Fragment implements INetDoer {
 	}
 
 	@Override
-	public void onResume() {
+	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		super.onResume();
+		super.onActivityCreated(savedInstanceState);
 		MyWindowManager.setNetState(false);
 		connectToServer();
 	}
@@ -65,6 +66,7 @@ public class NetWorkFragment extends Fragment implements INetDoer {
 	public void onDetach() {
 		// TODO Auto-generated method stub
 		unInitNetClient();
+		Log.i("onDetachonDetachonDetach", "onDetachonDetachonDetachonDetach");
 		super.onDetach();
 	}
 
