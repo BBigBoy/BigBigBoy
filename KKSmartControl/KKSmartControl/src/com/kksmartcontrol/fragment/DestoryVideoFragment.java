@@ -2,10 +2,10 @@ package com.kksmartcontrol.fragment;
 
 import com.example.kksmartcontrol.R;
 import com.kksmartcontrol.prevideoview.MyPreVideoView;
-
+ 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.os.Bundle;
+import android.os.Bundle; 
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
@@ -14,9 +14,7 @@ import android.view.View.OnDragListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-public class DestoryVideoFragment extends Fragment {
-	// 删除预览窗口可能经常发生，因此保存一个静态对象。 每次只是隐藏或显示，不销毁
-	public static DestoryVideoFragment destoryVideoViewFragment = null;
+public class DestoryVideoFragment extends Fragment { 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +47,7 @@ public class DestoryVideoFragment extends Fragment {
 				case DragEvent.ACTION_DRAG_ENDED:
 					FragmentTransaction fragmentTransaction = getActivity()
 							.getFragmentManager().beginTransaction();
-					fragmentTransaction.hide(destoryVideoViewFragment);
+					fragmentTransaction.hide(DestoryVideoFragment.this);
 					fragmentTransaction.commit();
 					Log.d("ACTION_DRAG_ENDED", "ACTION_DRAG_ENDED");
 					break;

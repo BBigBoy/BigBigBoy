@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="6dp"
-        android:text="@string/RGBsetting"
+        android:text="@string/rgbsetting"
         android:textColor="@color/dialog_font"
         android:textSize="23sp" />
 

@@ -1,22 +1,27 @@
 package com.kksmartcontrol.activity;
 
 import com.example.kksmartcontrol.R;
+import com.glh.montagecontrol.net.client.NetState;
 import com.kksmartcontrol.bean.KKSmartControlDataBean;
+import com.kksmartcontrol.net.NetWorkObject;
 import com.kksmartcontrol.preference.MySharedPreferences;
 import com.kksmartcontrol.preference.PreferencesUtils;
+import com.roger.match.library.MatchTextView;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
-import android.view.animation.AnimationUtils;
+import android.util.Log;
+import android.widget.TextView;
 
 public class SplashActivity extends Activity {
 
 	private Handler mHandler = new Handler();
+
+	private AnimatorSet animationSet = new AnimatorSet();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,37 +34,70 @@ public class SplashActivity extends Activity {
 			startActivity(intent);
 			finish();
 		}
-		View view = View.inflate(this, R.layout.activity_start, null);
-		setContentView(view);
-		Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha);
-		view.startAnimation(animation);
-		animation.setAnimationListener(new AnimationListener() {
-			@Override
-			public void onAnimationStart(Animation arg0) {
-			}
-
-			@Override
-			public void onAnimationRepeat(Animation arg0) {
-			}
-
-			@Override
-			public void onAnimationEnd(Animation arg0) {
-				mHandler.postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						goHome();
-					}
-				}, 500);
-			}
-		});
+		setContentView(R.layout.activity_start);
+		NetWorkObject.application = getApplication();
 
 		KKSmartControlDataBean.setRowNum(PreferencesUtils.getInt(this,
 				"rowNum", 2));
 		KKSmartControlDataBean.setColumnNum(PreferencesUtils.getInt(this,
 				"columnNum", 2));
+
+		TextView textView = (TextView) findViewById(R.id.textView1);
+		ObjectAnimator objectAnimator1 = ObjectAnimator.ofFloat(textView,
+				"alpha", 0.3f, 1.0f).setDuration(3000);
+		ObjectAnimator objectAnimator2 = ObjectAnimator.ofFloat(textView,
+				"scaleX", 0.3f, 1.0f).setDuration(3000);
+		ObjectAnimator objectAnimator3 = ObjectAnimator.ofFloat(textView,
+				"scaleY", 0.3f, 1.0f).setDuration(3000);
+		ObjectAnimator objectAnimator4 = ObjectAnimator.ofFloat(textView,
+				"rotationX", 0, 90).setDuration(1500);
+		objectAnimator4.setStartDelay(1000);
+		animationSet.play(objectAnimator1).with(objectAnimator2)
+				.with(objectAnimator3);
+		animationSet.play(objectAnimator4).after(objectAnimator3);
+		// animationSet.addListener(new AnimatorListenerAdapter() {
+		// /**
+		// * {@inheritDoc}
+		// *
+		// * @param animation
+		// */
+		// @Override
+		// public void onAnimationEnd(Animator animation) {
+		// super.onAnimationEnd(animation);
+		// mHandler.post(new Runnable() {
+		// @Override
+		// public void run() {
+		// // TODO Auto-generated method stub
+		// goToMainActivity();
+		// }
+		// });
+		// }
+		// });
+
 	}
 
-	private void goHome() {
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		animationSet.start();
+		if (NetWorkObject.getInstance().getNetStatus() != NetState.TCP_CONN_OPEN) {
+			NetWorkObject.getInstance().connectToServer();
+			Log.i("second", "onResume  != NetState.TCP_CONN_OPEN");
+		}
+		mHandler.postDelayed((new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				goToMainActivity();
+			}
+		}), 6000);
+	}
+
+	/**
+	 * 转到MainActivity
+	 */
+	private void goToMainActivity() {
 		Intent intent = new Intent();
 		intent.setClass(getApplicationContext(), MainActivity.class);
 		startActivity(intent);

@@ -3,7 +3,9 @@ package com.kksmartcontrol.floatwindow;
 import com.example.kksmartcontrol.R;
 import com.glh.montagecontrol.net.client.NetState;
 import com.kksmartcontrol.dialogfragment.AboutDialog;
-import com.kksmartcontrol.net.NetWorkFragment;
+import com.kksmartcontrol.net.NetWorkObject;
+import com.kksmartcontrol.util.ToastUtil;
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -80,7 +82,7 @@ public class PlusFloatWindow extends LinearLayout {
 				floatView.setVisibility(View.VISIBLE);
 				floatView.setSelected(false);
 				mParams.width = expandFloatView.getWidth() / 3;
-				mParams.x=MyWindowManager.plusFloatWindowWidth;
+				mParams.x = MyWindowManager.plusFloatWindowWidth;
 				windowManager.updateViewLayout(PlusFloatWindow.this, mParams);
 				expandFloatView.setVisibility(View.GONE);
 			}
@@ -89,8 +91,8 @@ public class PlusFloatWindow extends LinearLayout {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast.makeText(context, "用来进行应用基础设置....", Toast.LENGTH_LONG)
-						.show();
+				ToastUtil.showToast(context, "用来进行应用基础设置....",
+						Toast.LENGTH_LONG);
 				floatView.setVisibility(View.VISIBLE);
 				floatView.setSelected(false);
 				mParams.width = expandFloatView.getWidth() / 3;
@@ -105,8 +107,8 @@ public class PlusFloatWindow extends LinearLayout {
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			if (NetWorkFragment.getNetStatus() != NetState.TCP_CONN_OPEN) {
-				NetWorkFragment.connectToServer();
+			if (NetWorkObject.getInstance().getNetStatus() != NetState.TCP_CONN_OPEN) {
+				NetWorkObject.getInstance().connectToServer();
 				return true;
 			}
 			if (floatView.getVisibility() == View.VISIBLE) {

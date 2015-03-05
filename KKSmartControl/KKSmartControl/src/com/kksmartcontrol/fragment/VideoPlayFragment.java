@@ -3,13 +3,14 @@ package com.kksmartcontrol.fragment;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import tv.danmaku.ijk.media.player.IMediaPlayer.OnErrorListener;
 import tv.danmaku.ijk.media.widget.VideoView;
-
 import com.example.kksmartcontrol.R;
 import com.kksmartcontrol.playvideoview.PlayVideoViewGestureListener;
+import com.kksmartcontrol.util.FragmentUtil;
 import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -28,15 +29,27 @@ public class VideoPlayFragment extends Fragment {
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View view = inflater.inflate(R.layout.videoview_play, container, false);
+		VideoView_Init(view);
+		// 在PlayVideo显示时隐藏预览窗口，隐藏时会自动暂停预览播放
+		FragmentUtil.hideFragmentByTag(getActivity(), "VideoPreFragment");
 		return view;
 	}
 
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
+	public void onHiddenChanged(boolean hidden) {
 		// TODO Auto-generated method stub
-		super.onActivityCreated(savedInstanceState);
-		VideoView_Init(getView());
-		videoViewToPlay(playVideoView);
+		Log.d("onHiddenChanged", "playVideoViewonHiddenChanged" + hidden);
+		if (!hidden) {
+			playVideoView.start();
+			playVideoView.setVisibility(View.VISIBLE);
+			// 在PlayVideo显示时隐藏预览窗口，隐藏时会自动暂停预览播放
+			FragmentUtil.hideFragmentByTag(getActivity(), "VideoPreFragment");
+		}
+		if (hidden) {
+			playVideoView.stopPlayback();
+			playVideoView.setVisibility(View.GONE);
+		}
+		super.onHiddenChanged(hidden);
 	}
 
 	/**
@@ -67,6 +80,8 @@ public class VideoPlayFragment extends Fragment {
 				return gestureDetector.onTouchEvent(event);
 			}
 		});
+
+		videoViewToPlay(playVideoView);
 	}
 
 	/**
@@ -81,7 +96,7 @@ public class VideoPlayFragment extends Fragment {
 		// .parse("android.resource://com.example.kksmartcontrol/"
 		// + R.drawable.big));
 		videoView.setVideoURI(Uri.parse(Environment
-				.getExternalStorageDirectory().getPath() + "/15.MP4"));
+				.getExternalStorageDirectory().getPath() + "/video/5.MP4"));
 
 		// videoView.setVideoURI(Uri.parse("/sdcard/Video/5.MP4"));
 

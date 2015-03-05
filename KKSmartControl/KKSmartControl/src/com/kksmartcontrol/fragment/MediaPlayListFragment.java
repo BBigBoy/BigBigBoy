@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Locale;
 
 import com.example.kksmartcontrol.R;
+import com.kksmartcontrol.util.FragmentUtil;
+import com.kksmartcontrol.util.ToastUtil;
 import com.xlistview.adapter.PlayListAdapter;
 import com.xlistview.handle.CharacterParser;
 import com.xlistview.handle.PinyinComparator;
@@ -19,7 +21,6 @@ import com.xlistview.xlistview.XListView.IXListViewListener;
 import com.xml.sax.SaxService;
 
 import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -123,10 +124,8 @@ public class MediaPlayListFragment extends Fragment implements
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// 这里要利用adapter.getItem(position)来获取当前position所对应的对象
-				Toast.makeText(
-						context,
-						((PlayListItemModel) adapter.getItem(position - 1))
-								.getName(), Toast.LENGTH_SHORT).show();
+				ToastUtil.showToast(context, ((PlayListItemModel) adapter
+						.getItem(position - 1)).getName(), Toast.LENGTH_SHORT);
 			}
 		});
 		playListView.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -147,31 +146,36 @@ public class MediaPlayListFragment extends Fragment implements
 				View.DragShadowBuilder myShadow = new DragShadowBuilder(
 						dragView);
 				String localState = "fromListViewItem";
-
-				if (VideoPreFragment.videoPreFragment == null)
-					VideoPreFragment.videoPreFragment = new VideoPreFragment();
-				FragmentTransaction fragmentTransaction = getActivity()
-						.getFragmentManager().beginTransaction();
-				VideoPlayFragment videoPlayFragment = (VideoPlayFragment) getActivity()
-						.getFragmentManager().findFragmentByTag(
-								"VideoPlayFragment");
-				if (VideoPreFragment.videoPreFragment.isAdded()) {
-					if (VideoPreFragment.videoPreFragment.isHidden()) {
-						if (videoPlayFragment != null
-								&& videoPlayFragment.isAdded()) {
-							getActivity().getFragmentManager().popBackStack();
-						} else {
-							fragmentTransaction
-									.show(VideoPreFragment.videoPreFragment);
-						}
-					}
-				} else {
-					fragmentTransaction.add(R.id.videodisplay,
-							VideoPreFragment.videoPreFragment);
-				}
-
-				fragmentTransaction.hide(PJDiaplayFragment.pjDiaplayFragment);
-				fragmentTransaction.commit();
+				// VideoPreFragment videoPreFragment = (VideoPreFragment)
+				// getActivity()
+				// .getFragmentManager().findFragmentByTag(
+				// "VideoPreFragment");
+				// if (videoPreFragment == null)
+				// videoPreFragment = new VideoPreFragment();
+				// android.app.FragmentTransaction fragmentTransaction =
+				// getActivity()
+				// .getFragmentManager().beginTransaction();
+				// VideoPlayFragment videoPlayFragment = (VideoPlayFragment)
+				// getActivity()
+				// .getFragmentManager().findFragmentByTag(
+				// "VideoPlayFragment");
+				// if (videoPreFragment.isAdded()) {
+				// if (videoPreFragment.isHidden()) {
+				// if (videoPlayFragment != null
+				// && videoPlayFragment.isAdded()) {
+				// getActivity().getFragmentManager().popBackStack();
+				// } else {
+				// fragmentTransaction.show(videoPreFragment);
+				// }
+				// }
+				// } else {
+				// fragmentTransaction.add(R.id.displaylayout,
+				// videoPreFragment, "VideoPreFragment");
+				// }
+				// fragmentTransaction.commit();
+				FragmentUtil.removeVisibleFragmentByTag(context,
+						"VideoPlayFragment", R.animator.fragmentexit);
+				FragmentUtil.showExistingFragmentByTag(context, "VideoPreFragment");
 				// Starts the drag
 				v.startDrag(dragData, myShadow, localState, 0);
 				return false;
@@ -202,8 +206,7 @@ public class MediaPlayListFragment extends Fragment implements
 			@Override
 			public void run() {
 				// getData();
-				Toast.makeText(context, "上拉刷新在这里更新数据", Toast.LENGTH_LONG)
-						.show();
+				ToastUtil.showToast(context, "上拉刷新在这里更新数据", Toast.LENGTH_LONG);
 				stopLoad();
 			}
 		}, 1000);
@@ -306,7 +309,6 @@ public class MediaPlayListFragment extends Fragment implements
 			List<PlayListItemModel> SourceDataList = filledData(getListFromXML());
 			// 根据a-z进行排序源数据
 			Collections.sort(SourceDataList, pinyinComparator);
-
 			return SourceDataList;
 		}
 	}

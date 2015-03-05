@@ -12,23 +12,32 @@
         <item>当前版本：V1.0.0</item>
     </string-array>
 
-    <string name="text_row">行数</string>
-    <string name="text_column">列数</string>
+    <string name="text_row">行&#160;&#160;数</string>
+    <string name="text_column">列&#160;&#160;数</string>
     <string name="set_row">2</string>
     <string name="set_column">2</string>
     <string name="set_submit">提交</string>
     <string name="about_ok">确定</string>
     <string name="dev_title">可连接设备</string>
-    <string name="adjustBacklight">背光调节</string>
-    <string name="adjustPicmode">图像模式调节</string>
-    <string name="RGBsetting">色温调节</string>
+    <string name="backlight">背光</string>
+    <string name="adjustPicmode">图像模式</string>
+    <string name="rgbsetting">色温</string>
+    <string name="pjcontrol">拼接控制</string>
     <string name="colorR">R&#160;&#160;增益</string>
     <string name="colorG">G&#160;&#160;增益</string>
     <string name="colorB">B&#160;&#160;增益</string>
-    <string name="brightness">亮&#160;&#160;&#160;&#160;度</string>
+    <string name="brightness">亮度</string>
     <string name="contrast">对比度</string>
-    <string name="tone">色&#160;&#160;&#160;&#160;度</string>
-    <string name="sharpness">锐&#160;&#160;&#160;&#160;度</string>
+    <string name="tone">色度</string>
+    <string name="sharpness">锐度</string>
+    <string name="backlight_maxvalue">100</string>
+    <string name="colorR_maxvalue">255</string>
+    <string name="colorG_maxvalue">255</string>
+    <string name="colorB_maxvalue">255</string>
+    <string name="brightness_maxvalue">100</string>
+    <string name="contrast_maxvalue">100</string>
+    <string name="tone_maxvalue">100</string>
+    <string name="sharpness_maxvalue">25</string>
     <string name="device_connect">设备连接成功了!</string>
     <string name="device_connect_fail">设备连接失败了!</string>
     <string name="device_connect_close">设备连接关闭!</string>
@@ -56,7 +65,7 @@
     <string name="color_cold">6500K</string>
     <string name="color_warm">9300K</string>
     <string name="color_manual">自定义</string>
-    <string name="backlight_adj">背&#160;&#160;&#160;&#160;光</string>
+    <string name="backlight_adj">背光</string>
     <string name="set_sleep">休眠</string>
     <string name="set_wake">唤醒</string>
     <string name="exitdialog_title">提示</string>
@@ -64,7 +73,11 @@
     <string name="buffering">正在加載……</string>
     <string name="submit">确&#160;&#160;定</string>
     <string name="quit">取&#160;&#160;消</string>
+    <string name="revocation">撤&#160;销</string>
     <string name="netconnect">连接至网络</string>
-    <string name="netconnectinfor">正在处理网络连接\n\n请稍后...</string>
+    <string name="contentDescription">contentDescription</string>
+    <string name="netconnectinfor">正在处理网络连接\n\n请稍后</string>
+    <!-- 这是所有手动设置需要用到的tag标签 -->
+    <string name="manualsetting">manualsetting</string>
 
 </resources>

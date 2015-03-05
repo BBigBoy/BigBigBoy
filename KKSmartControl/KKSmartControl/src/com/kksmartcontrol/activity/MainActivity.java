@@ -1,29 +1,45 @@
 package com.kksmartcontrol.activity;
 
+import java.util.ArrayList;
+import java.util.List;
 import com.example.kksmartcontrol.R;
+import com.glh.montagecontrol.net.client.NetState;
+import com.kksmartcontrol.bean.Coordinate;
 import com.kksmartcontrol.bean.KKSmartControlDataBean;
 import com.kksmartcontrol.dialogfragment.ExitDialog;
-import com.kksmartcontrol.floatwindow.MyWindowManager;
 import com.kksmartcontrol.fragment.ControlSettingFragment;
 import com.kksmartcontrol.fragment.MediaPlayListFragment;
-import com.kksmartcontrol.fragment.PJDiaplayFragment;
-import com.kksmartcontrol.net.NetWorkFragment;
+import com.kksmartcontrol.fragment.NetErrIndicateFragment;
+import com.kksmartcontrol.fragment.PlusFragment;
+import com.kksmartcontrol.fragment.VideoPreFragment;
+import com.kksmartcontrol.net.NetWorkObject;
 import com.kksmartcontrol.pagersliding.PagerSlidingTabStrip;
+import com.kksmartcontrol.pjscreenview.PJCell;
+import com.kksmartcontrol.pjscreenview.PJScreenView;
 import com.kksmartcontrol.preference.PreferencesUtils;
-
-import android.app.FragmentTransaction;
+import com.kksmartcontrol.util.FragmentUtil;
+import com.kksmartcontrol.util.PjScreenViewInterface;
+import com.kksmartcontrol.util.ToastUtil;
+import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements
+		PagerSlidingTabStrip.RefreshActivity, PjScreenViewInterface {
 
 	public String TAG = this.getClass().getName();
 
@@ -41,44 +57,104 @@ public class MainActivity extends FragmentActivity {
 	 */
 	private DisplayMetrics displayMetrics;
 
-	FragmentTransaction fragmentTransaction;
+	android.app.FragmentTransaction fragmentTransaction;
+
+	private TextView titleText;
+	ObjectAnimator titleTextAnimator;
+	private Handler mHandler = new Handler();
+
+	PJScreenView pjScreenView;
+
+	ImageView plusImage;
+	ObjectAnimator titleAnimator;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_main);
-		fragmentTransaction = getFragmentManager().beginTransaction();
+		titleText = (TextView) findViewById(R.id.titletext);
+		titleTextAnimator = ObjectAnimator.ofFloat(titleText, "alpha", 0.3f,
+				1.0f).setDuration(1300);
+		NetWorkObject.context = this;
+		Log.i("second", "onCreate");
+		plusImage = (ImageView) findViewById(R.id.plus);
+		titleAnimator = ObjectAnimator.ofFloat(plusImage, "rotation", 0, -45)
+				.setDuration(600);
+		pjScreenView = (PJScreenView) findViewById(R.id.pjscreenview);
 
-		PJDiaplayFragment pjDiaplayFragment = new PJDiaplayFragment();
-		fragmentTransaction.replace(R.id.videodisplay, pjDiaplayFragment);
-		// 添加管理网络连接的fragment
-		fragmentTransaction.add(new NetWorkFragment(), "network");
-		fragmentTransaction.commit();
-
+		pjScreenView.setSplicesMode(KKSmartControlDataBean.getRowNum(),
+				KKSmartControlDataBean.getColumnNum());
 		displayMetrics = getResources().getDisplayMetrics();
 		ViewPager pager = (ViewPager) findViewById(R.id.pager);
 		tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 		pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
 		tabs.setViewPager(pager);
 		setTabsValue();
-		// 创建悬浮窗
-		MyWindowManager.createPlusFloatWindow(this);
 	}
 
 	@Override
-	protected void onResume() {
+	protected void onStart() {
 		// TODO Auto-generated method stub
-		super.onResume();
-		// if (NetWorkObject.getInstance().getNetStatus() !=
-		// NetState.TCP_CONN_OPEN) {
-		// MyWindowManager.setNetState(false);
-		// NetWorkObject.getInstance().connectToServer();
-		// }
-		// 显示悬浮窗
-		MyWindowManager.displayPlusFloatWindow();
+		super.onStart();
+		if (NetWorkObject.getInstance().getNetStatus() != NetState.TCP_CONN_OPEN) {
+			showNetErrIndicate();
+		} else {
+			ToastUtil.showToast(this, "已连接到服务器 ！", Toast.LENGTH_LONG);
+		}
 	}
+
+	/**
+	 * 隐藏网络未连接提示
+	 */
+	public void hideNetErrIndicate() {
+		mHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				FragmentUtil.hideFragmentByTag(MainActivity.this,
+						"NetErrIndicate");
+			}
+		});
+
+	}
+  
+	/**
+	 * 显示网络未连接提示
+	 */
+	public void showNetErrIndicate() {
+		mHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if (FragmentUtil.hasFragmentSpecifiedByTag(MainActivity.this,
+						"NetErrIndicate")) {
+					FragmentUtil.showExistingFragmentByTag(MainActivity.this,
+							"NetErrIndicate");
+				} else {
+					FragmentUtil.addFragmentWithTag(MainActivity.this,
+							NetErrIndicateFragment.class, R.id.displaylayout,
+							"NetErrIndicate", R.animator.neterrfragmententer);
+				}
+			}
+		});
+
+	}
+
+	// @Override
+	// protected void onResume() {
+	// // TODO Auto-generated method stub
+	// super.onResume();
+	// if (NetWorkObject.getInstance().getNetStatus() != NetState.TCP_CONN_OPEN)
+	// {
+	// MyWindowManager.setNetState(false);
+	// NetWorkObject.getInstance().connectToServer();
+	// Log.i("second", "onResume  != NetState.TCP_CONN_OPEN");
+	// }
+	// Log.i("second", "onResume");
+	// // 显示悬浮窗
+	// MyWindowManager.displayPlusFloatWindow();
+	// }
 
 	@Override
 	protected void onPause() {
@@ -87,23 +163,136 @@ public class MainActivity extends FragmentActivity {
 				KKSmartControlDataBean.getRowNum());
 		PreferencesUtils.putInt(this, "columnNum",
 				KKSmartControlDataBean.getColumnNum());
-		// 隐藏悬浮窗
-		MyWindowManager.hidePlusFloatWindow();
+		Log.i("second", "onPause");
 		super.onPause();
+	}
+
+	public void plusClick(View v) {
+		if (!v.isSelected()) {
+			v.setSelected(true);
+			titleAnimator.start();
+			FragmentUtil.addFragmentWithTag(this, PlusFragment.class,
+					R.id.listlayout, "plusFragment",
+					R.animator.plusfragmententer);
+		} else {
+			v.setSelected(false);
+			titleAnimator.reverse();
+			FragmentUtil.removeFragmentByTag(this, "plusFragment",
+					R.animator.plusfragmentexit);
+		}
+	}
+
+	/**
+	 * 图像模式设置、背光、色温控制的fragment中的关闭按钮事件
+	 * 
+	 * @param v
+	 */
+	public void onCloseBtnClick(View v) {
+		FragmentUtil.removeVisibleFragmentByTag(this,
+				getResources().getString(R.string.manualsetting),
+				R.animator.fragmentexit);
+
+	}
+
+	@Override
+	public void refreshDisplayLayout(final int position) {
+		// TODO Auto-generated method stub
+		mHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if (position == 0) {
+					FragmentUtil.removeFragmentByTag(MainActivity.this,
+							"VideoPreFragment", R.animator.fragmentexit);
+					FragmentUtil.removeFragmentByTag(MainActivity.this,
+							"VideoPlayFragment", R.animator.fragmentexit);
+					// MainActivity.this.getFragmentManager().popBackStack(
+					// "VideoPlay",
+					// FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+				} else {
+					FragmentUtil.addFragmentWithTag(MainActivity.this,
+							VideoPreFragment.class, R.id.displaylayout,
+							"VideoPreFragment", R.animator.plusfragmententer);
+				}
+			}
+		});
+	}
+
+	@Override
+	public void refreshTextAlpha(final float alpha) {
+		mHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				titleText.setAlpha(alpha);
+			}
+		});
+	}
+
+	@Override
+	public void refreshTitle(final int position) {
+		// TODO Auto-generated method stub
+		mHandler.post(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if (position == 1) {
+					titleText.setText("视频播放");
+					plusImage.setVisibility(View.GONE);
+				} else {
+					titleText.setText("拼接控制");
+					plusImage.setVisibility(View.VISIBLE);
+				}
+				titleTextAnimator.start();
+			}
+		});
+	}
+
+	@Override
+	public void setPJSplicesMode(int ROW, int COLUMN) {
+		pjScreenView.setSplicesMode(ROW, COLUMN);
+	}
+
+	@Override
+	public void setInputSignl(String inputSignl) {
+		pjScreenView.setInputSignl(inputSignl);
+	}
+
+	@Override
+	public List<Coordinate> getCoordinateList() {
+		// TODO Auto-generated method stub
+
+		List<Coordinate> coordinateList = new ArrayList<Coordinate>();
+		List<PJCell> selectList = pjScreenView.getSelectList();
+		Log.d("getCoordinateListlllll", "\n\nselectList.size()---->"
+				+ selectList.size());
+		for (PJCell cell : selectList) {
+			coordinateList.add(new Coordinate(cell.rowNum, cell.columnNum));
+			Log.d("getCoordinateList", "\n\n---->" + cell);
+		}
+		Log.d("getCoordinateListlllll", "\n\ncoordinateList.size()---->"
+				+ coordinateList.size());
+		return coordinateList;
+
+	}
+
+	@Override
+	public boolean isSelectListEmpty() {
+		// TODO Auto-generated method stub
+		return pjScreenView.getSelectList().isEmpty();
 	}
 
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
-		// 移除悬浮窗
-		MyWindowManager.removePlusFloatWindow();
+		NetWorkObject.getInstance().setNetStatus(NetState.NET_STATUS_ERR);
+		NetWorkObject.getInstance().unInitNetClient();
+		NetWorkObject.context = null;
+		Log.i("second", "onDestroy");
 		super.onDestroy();
 	}
-
-	// public void addPreVideoViewFragment() {
-	// fragmentTransaction.add(R.id.videodisplay, new Fragment(), "preview");
-	//
-	// }
 
 	/**
 	 * 对PagerSlidingTabStrip的各项属性进行赋值。
@@ -170,10 +359,24 @@ public class MainActivity extends FragmentActivity {
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
+
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+			if (FragmentUtil
+					.removeVisibleFragmentByTag(this,
+							getResources().getString(R.string.manualsetting),
+							R.animator.fragmentexit))
+				return false;
+			if (plusImage.isSelected()) {
+				plusImage.setSelected(false);
+				titleAnimator.reverse();
+				FragmentUtil.removeFragmentByTag(this, "plusFragment",
+						R.animator.plusfragmentexit);
+				return false;
+			}
 			// displayDialog(context, R.layout.exitpopdialog);
 			new ExitDialog().show(getFragmentManager(), "Exit");
 		}
 		return false;
 	}
+
 }

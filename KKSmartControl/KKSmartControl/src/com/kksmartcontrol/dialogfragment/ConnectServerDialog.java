@@ -9,8 +9,8 @@ import android.util.Log;
 import android.view.View;
 import com.example.kksmartcontrol.R;
 import com.glh.montagecontrol.net.client.NetState;
-import com.kksmartcontrol.dialog.util.DialogUtil;
-import com.kksmartcontrol.net.NetWorkFragment;
+import com.kksmartcontrol.dialog.util.DialogUtil; 
+import com.kksmartcontrol.net.NetWorkObject;
 
 public class ConnectServerDialog extends DialogFragment {
 
@@ -33,7 +33,7 @@ public class ConnectServerDialog extends DialogFragment {
 		super.onResume();
 		// 在networkobject中，可能这个网络连接dialog对象还没完全创建就已经连上网，
 		// 此时通过finviewbytag是找不到这个对象的，因此在此处判断，如果已经连上网络，则不显示
-		if (NetWorkFragment.getNetStatus() == NetState.TCP_CONN_OPEN) {
+		if (NetWorkObject.getInstance().getNetStatus() == NetState.TCP_CONN_OPEN) {
 			this.dismiss();
 		}
 	}

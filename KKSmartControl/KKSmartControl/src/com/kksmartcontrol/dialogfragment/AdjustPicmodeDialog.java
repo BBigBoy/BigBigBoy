@@ -3,22 +3,23 @@ package com.kksmartcontrol.dialogfragment;
 import java.lang.ref.WeakReference;
 
 import com.example.kksmartcontrol.R;
-import com.kksmartcontrol.bean.KKSmartControlDataBean;
+import com.kksmartcontrol.activity.MainActivity; 
 import com.kksmartcontrol.dialog.util.DialogUtil;
-import com.kksmartcontrol.dialog.util.DialogUtil.SeekType;
 import com.kksmartcontrol.net.ParameDataHandle.SystemFuntion;
 import com.kksmartcontrol.netcmd.SetPJ_Infor;
 import com.kksmartcontrol.preference.PreferencesUtils;
+import com.kksmartcontrol.util.PjScreenViewInterface;
+import com.kksmartcontrol.util.SeekType;
 
 import android.app.AlertDialog;
-import android.app.Dialog;  
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;  
+import android.os.SystemClock;
 import android.support.v4.app.DialogFragment;
-import android.util.Log; 
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -39,6 +40,7 @@ public class AdjustPicmodeDialog extends DialogFragment implements
 	TextView contrastText = null;
 	TextView toneText = null;
 	TextView shapnessText = null;
+	PjScreenViewInterface coordinateList;
 	private Handler SeekbarHandler = new MyHandler(this);
 
 	private static class MyHandler extends Handler {
@@ -81,7 +83,7 @@ public class AdjustPicmodeDialog extends DialogFragment implements
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 
 		context = getActivity();
-
+		coordinateList = ((MainActivity) getActivity());
 		View layoutView = DialogUtil.createDialogView(context,
 				R.layout.dialog_adjustpicmode);
 		InitView(layoutView);
@@ -193,22 +195,22 @@ public class AdjustPicmodeDialog extends DialogFragment implements
 				public void run() {
 					// TODO Auto-generated method stub
 					setPj_Infor.setPjFunctionPacket(
-							KKSmartControlDataBean.getCoordinateList(),
+							coordinateList.getCoordinateList(),
 							SystemFuntion.SET_PICMODE_BRIGHTNESS, (byte) 0x31,
 							(byte) 0x00, (byte) brightnessValue);
 					SystemClock.sleep(300);
 					setPj_Infor.setPjFunctionPacket(
-							KKSmartControlDataBean.getCoordinateList(),
+							coordinateList.getCoordinateList(),
 							SystemFuntion.SET_PICMODE_CONTRAST, (byte) 0x31,
 							(byte) 0x00, (byte) contrastValue);
 					SystemClock.sleep(300);
 					setPj_Infor.setPjFunctionPacket(
-							KKSmartControlDataBean.getCoordinateList(),
+							coordinateList.getCoordinateList(),
 							SystemFuntion.SET_PICMODE_TON, (byte) 0x31,
 							(byte) 0x00, (byte) toneValue);
 					SystemClock.sleep(300);
 					setPj_Infor.setPjFunctionPacket(
-							KKSmartControlDataBean.getCoordinateList(),
+							coordinateList.getCoordinateList(),
 							SystemFuntion.SET_PICMODE_SHAPNESS, (byte) 0x31,
 							(byte) 0x00, (byte) shapnessValue);
 				}
@@ -235,28 +237,28 @@ public class AdjustPicmodeDialog extends DialogFragment implements
 		switch (seekBar.getId()) {
 		case R.id.brightnessseekbar:
 			setPj_Infor.setPjFunctionPacket(
-					KKSmartControlDataBean.getCoordinateList(),
+					coordinateList.getCoordinateList(),
 					SystemFuntion.SET_PICMODE_BRIGHTNESS, (byte) 0x31,
 					(byte) 0x00, (byte) brightnessValue);
 			Log.i("DialogViewInit", "brightnessseekbar停止后执行的操作，有待进一步归类");
 			break;
 		case R.id.contrastseekbar:
 			setPj_Infor.setPjFunctionPacket(
-					KKSmartControlDataBean.getCoordinateList(),
+					coordinateList.getCoordinateList(),
 					SystemFuntion.SET_PICMODE_CONTRAST, (byte) 0x31,
 					(byte) 0x00, (byte) contrastValue);
 			Log.i("DialogViewInit", "contrastseekbar停止后执行的操作，有待进一步归类");
 			break;
 		case R.id.toneseekbar:
 			setPj_Infor.setPjFunctionPacket(
-					KKSmartControlDataBean.getCoordinateList(),
+					coordinateList.getCoordinateList(),
 					SystemFuntion.SET_PICMODE_TON, (byte) 0x31, (byte) 0x00,
 					(byte) toneValue);
 			Log.i("DialogViewInit", "toneseekbar停止后执行的操作，有待进一步归类");
 			break;
 		case R.id.sharpnessseekbar:
 			setPj_Infor.setPjFunctionPacket(
-					KKSmartControlDataBean.getCoordinateList(),
+					coordinateList.getCoordinateList(),
 					SystemFuntion.SET_PICMODE_SHAPNESS, (byte) 0x31,
 					(byte) 0x00, (byte) shapnessValue);
 			Log.i("DialogViewInit", "sharpnessseekbar停止后执行的操作，有待进一步归类");

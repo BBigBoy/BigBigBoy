@@ -3,15 +3,16 @@ package com.kksmartcontrol.dialogfragment;
 import java.lang.ref.WeakReference;
 
 import com.example.kksmartcontrol.R;
-import com.kksmartcontrol.bean.KKSmartControlDataBean;
+import com.kksmartcontrol.activity.MainActivity;
 import com.kksmartcontrol.dialog.util.DialogUtil;
-import com.kksmartcontrol.dialog.util.DialogUtil.SeekType;
 import com.kksmartcontrol.net.ParameDataHandle.SystemFuntion;
 import com.kksmartcontrol.netcmd.SetPJ_Infor;
 import com.kksmartcontrol.preference.PreferencesUtils;
+import com.kksmartcontrol.util.PjScreenViewInterface;
+import com.kksmartcontrol.util.SeekType;
 
 import android.app.AlertDialog;
-import android.app.Dialog; 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,7 +33,7 @@ public class BacklightDialog extends DialogFragment implements
 	Context context = null;
 	int backlightValue;
 	TextView backlightText = null;
-
+	PjScreenViewInterface coordinateList;
 	private Handler SeekbarHandler = new MyHandler(this);
 
 	private static class MyHandler extends Handler {
@@ -63,8 +64,8 @@ public class BacklightDialog extends DialogFragment implements
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-		context = getActivity(); 
-		
+		context = getActivity();
+		coordinateList = ((MainActivity) getActivity());
 		View layoutView = DialogUtil.createDialogView(context,
 				R.layout.dialog_backlight);
 		InitView(layoutView);
@@ -104,7 +105,7 @@ public class BacklightDialog extends DialogFragment implements
 		case R.id.DialogBut_cancel:
 			backlightValue = PreferencesUtils.getInt(context, "backlightValue",
 					100);
-			setPj_Infor.setPjFunctionPacket(KKSmartControlDataBean.getCoordinateList(),
+			setPj_Infor.setPjFunctionPacket(coordinateList.getCoordinateList(),
 					SystemFuntion.SET_ADJUST_BACKLIGHT, (byte) 0x31,
 					(byte) 0x00, (byte) backlightValue);
 			Log.i("DialogViewInit", "点击取消后执行的操作，有待进一步归类");
@@ -142,7 +143,7 @@ public class BacklightDialog extends DialogFragment implements
 		// switch (seekBar.getId()) {
 		//
 		// case R.id.backlightseekbar:
-		setPj_Infor.setPjFunctionPacket(KKSmartControlDataBean.getCoordinateList(),
+		setPj_Infor.setPjFunctionPacket(coordinateList.getCoordinateList(),
 				SystemFuntion.SET_ADJUST_BACKLIGHT, (byte) 0x31, (byte) 0x00,
 				(byte) backlightValue);
 		Log.i("DialogViewInit", "backlightseekbar停止后执行的操作，有待进一步归类");

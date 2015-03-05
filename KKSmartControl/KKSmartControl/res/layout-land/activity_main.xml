@@ -6,17 +6,19 @@
     android:orientation="horizontal" >
 
     <FrameLayout
-        android:id="@+id/videodisplay"
+        android:id="@+id/displaylayout"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3" >
-    </FrameLayout>
+        android:layout_weight="3"
+        android:background="@color/displaybg"
+        android:padding="2dp" >
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="@drawable/line_v"
-        android:contentDescription="@string/line" />
+        <com.kksmartcontrol.pjscreenview.PJScreenView
+            android:id="@+id/pjscreenview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </com.kksmartcontrol.pjscreenview.PJScreenView>
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/listlayout"
@@ -29,16 +31,22 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                layout="@layout/main_title" />
+
             <android.support.v4.view.ViewPager
                 android:id="@+id/pager"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="14" />
 
             <com.kksmartcontrol.pagersliding.PagerSlidingTabStrip
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="30dp" />
+                android:layout_height="1dp" />
         </LinearLayout>
     </FrameLayout>
     <!-- 这里的SurfaceView并不会显示，由于Surfaceview对象第一次加载时会闪屏，因此在程序启动时先加载一次    播放器是继承至SurfaceView的 -->

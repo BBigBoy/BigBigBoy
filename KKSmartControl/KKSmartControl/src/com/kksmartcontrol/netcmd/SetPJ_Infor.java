@@ -1,18 +1,19 @@
 package com.kksmartcontrol.netcmd;
 
-import java.util.ArrayList;
+import java.util.List;
+
 import com.glh.montagecontrol.net.client.NetClient;
 import com.glh.montagecontrol.net.packet.CommandPacket;
 import com.kksmartcontrol.bean.Coordinate;
 import com.kksmartcontrol.bean.KKSmartControlDataBean;
-import com.kksmartcontrol.net.NetWorkFragment;
+import com.kksmartcontrol.net.NetWorkObject;
 import com.kksmartcontrol.net.ParameDataHandle;
 import com.kksmartcontrol.net.ParameDataHandle.SystemFuntion;
 
 public class SetPJ_Infor {
 
 	ParameDataHandle parameData = new ParameDataHandle();
-	NetClient netclient = NetWorkFragment.getNetClient();
+	NetClient netclient = NetWorkObject.getInstance().getNetClient();
 
 	private static class SetPJ_InforHolder {
 		public final static SetPJ_Infor instance = new SetPJ_Infor();
@@ -23,14 +24,14 @@ public class SetPJ_Infor {
 		return SetPJ_InforHolder.instance;
 	}
 
-	public void setPjSource(ArrayList<Coordinate> coordinateList,
+	public void setPjSource(List<Coordinate> coordinateList,
 			SystemFuntion function, byte cmd) {
 		CommandPacket cmdPacket = new CommandPacket();
 		byte id = 0;
 		byte dataHigh = 0;
 		byte dataLow = 0;
 		Coordinate[] PolarCoordinates = parameData
-				.getPolarCoordinates(KKSmartControlDataBean.getCoordinateList());
+				.getPolarCoordinates(coordinateList);
 		dataHigh = parameData.getPacketDataHigh(PolarCoordinates);
 
 		for (Coordinate item : coordinateList) {
@@ -45,7 +46,7 @@ public class SetPJ_Infor {
 		}
 	}
 
-	public void setPjFunctionPacket(ArrayList<Coordinate> coordinateList,
+	public void setPjFunctionPacket(List<Coordinate> coordinateList,
 			SystemFuntion function, byte cmd, byte dataHigh, byte dataLow) {
 
 		CommandPacket cmdPacket = new CommandPacket();
@@ -61,7 +62,7 @@ public class SetPJ_Infor {
 
 	}
 
-	public void adjustColorMode(ArrayList<Coordinate> coordinateList,
+	public void adjustColorMode(List<Coordinate> coordinateList,
 			SystemFuntion function, byte cmd, byte dataHigh, byte dataLow,
 			byte gainR, byte gainG, byte gainB, byte offsetR, byte offsetG,
 			byte offsetB) {

@@ -90,6 +90,7 @@ public class XListView extends ListView implements OnScrollListener {
 		mHeaderView.getViewTreeObserver().addOnGlobalLayoutListener(
 				new OnGlobalLayoutListener() {
 
+					@SuppressWarnings("deprecation")
 					@Override
 					public void onGlobalLayout() {
 						mHeaderViewHeight = mHeaderViewContent.getHeight();

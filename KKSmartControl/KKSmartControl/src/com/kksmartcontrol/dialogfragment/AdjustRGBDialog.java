@@ -3,15 +3,16 @@ package com.kksmartcontrol.dialogfragment;
 import java.lang.ref.WeakReference;
 
 import com.example.kksmartcontrol.R;
-import com.kksmartcontrol.bean.KKSmartControlDataBean;
+import com.kksmartcontrol.activity.MainActivity; 
 import com.kksmartcontrol.dialog.util.DialogUtil;
-import com.kksmartcontrol.dialog.util.DialogUtil.SeekType;
 import com.kksmartcontrol.net.ParameDataHandle.SystemFuntion;
 import com.kksmartcontrol.netcmd.SetPJ_Infor;
 import com.kksmartcontrol.preference.PreferencesUtils;
+import com.kksmartcontrol.util.PjScreenViewInterface;
+import com.kksmartcontrol.util.SeekType;
 
 import android.app.AlertDialog;
-import android.app.Dialog; 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,6 +39,7 @@ public class AdjustRGBDialog extends DialogFragment implements
 	TextView GGainText = null;
 	TextView BGainText = null;
 
+	PjScreenViewInterface coordinateList;
 	private Handler SeekbarHandler = new MyHandler(this);
 
 	private static class MyHandler extends Handler {
@@ -74,7 +76,7 @@ public class AdjustRGBDialog extends DialogFragment implements
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		context = getActivity();
-
+		coordinateList = ((MainActivity) getActivity());
 		View layoutView = DialogUtil.createDialogView(context,
 				R.layout.dialog_adjustrgb);
 		InitViewControls(layoutView);
@@ -134,7 +136,7 @@ public class AdjustRGBDialog extends DialogFragment implements
 				public void run() {
 					// TODO Auto-generated method stub
 					setPj_Infor.adjustColorMode(
-							KKSmartControlDataBean.getCoordinateList(),
+							coordinateList.getCoordinateList(),
 							SystemFuntion.SET_COLORMODE_R, (byte) 0x31,
 							(byte) 0x00, (byte) 0x06, (byte) colorRValue,
 							(byte) colorGValue, (byte) colorBValue,
@@ -189,21 +191,21 @@ public class AdjustRGBDialog extends DialogFragment implements
 		// TODO Auto-generated method stub
 		switch (seekBar.getId()) {
 		case R.id.colorRseekbar:
-			setPj_Infor.adjustColorMode(KKSmartControlDataBean.getCoordinateList(),
+			setPj_Infor.adjustColorMode(coordinateList.getCoordinateList(),
 					SystemFuntion.SET_COLORMODE_R, (byte) 0x31, (byte) 0x00,
 					(byte) 0x06, (byte) colorRValue, (byte) colorGValue,
 					(byte) colorBValue, (byte) 0x80, (byte) 0x80, (byte) 0x80);
 			Log.i("DialogViewInit", "Rseekbar停止后执行的操作，有待进一步归类");
 			break;
 		case R.id.colorGseekbar:
-			setPj_Infor.adjustColorMode(KKSmartControlDataBean.getCoordinateList(),
+			setPj_Infor.adjustColorMode(coordinateList.getCoordinateList(),
 					SystemFuntion.SET_COLORMODE_G, (byte) 0x31, (byte) 0x00,
 					(byte) 0x06, (byte) colorRValue, (byte) colorGValue,
 					(byte) colorBValue, (byte) 0x80, (byte) 0x80, (byte) 0x80);
 			Log.i("DialogViewInit", "Gseekbar停止后执行的操作，有待进一步归类");
 			break;
 		case R.id.colorBseekbar:
-			setPj_Infor.adjustColorMode(KKSmartControlDataBean.getCoordinateList(),
+			setPj_Infor.adjustColorMode(coordinateList.getCoordinateList(),
 					SystemFuntion.SET_COLORMODE_B, (byte) 0x31, (byte) 0x00,
 					(byte) 0x06, (byte) colorRValue, (byte) colorGValue,
 					(byte) colorBValue, (byte) 0x80, (byte) 0x80, (byte) 0x80);

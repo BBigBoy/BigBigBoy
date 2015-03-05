@@ -9,12 +9,12 @@
         android:id="@+id/sort_letter"
         android:layout_width="match_parent"
         android:layout_height="26dp"
-        android:background="#00FA9A"
+        android:background="#0660A0"
         android:clickable="false"
         android:gravity="center_vertical"
         android:paddingLeft="6dip"
         android:text="A"
-        android:textColor="#0000FF"
+        android:textColor="@color/color_white"
         android:visibility="gone" />
 
     <LinearLayout

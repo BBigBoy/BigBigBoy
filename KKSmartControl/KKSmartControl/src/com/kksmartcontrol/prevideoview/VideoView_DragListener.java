@@ -1,6 +1,6 @@
 package com.kksmartcontrol.prevideoview;
 
-import com.example.kksmartcontrol.R; 
+import com.example.kksmartcontrol.R;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
@@ -31,7 +31,7 @@ public class VideoView_DragListener implements OnDragListener {
 			break;
 		case DragEvent.ACTION_DRAG_ENTERED:
 			if (!isplaying)
-				v.setBackgroundResource(R.drawable.linbg);
+				v.setBackgroundResource(R.drawable.screen_bg_hoved);
 			Log.d(TAG, "Action is DragEvent.ACTION_DRAG_ENTERED");
 			break;
 		case DragEvent.ACTION_DRAG_EXITED:
@@ -77,11 +77,13 @@ public class VideoView_DragListener implements OnDragListener {
 		// videoView.setVideoURI(Uri
 		// .parse("android.resource://com.example.kksmartcontrol/"
 		// + R.drawable.lit));
+
 		videoView.setVideoURI(Uri.parse(Environment
-				.getExternalStorageDirectory().getPath() + "/5.MP4"));
+				.getExternalStorageDirectory().getPath() + "/video/5.MP4"));
+
 		// videoView.setVideoURI(Uri.parse("/sdcard/Video/5.MP4"));
 
-		// String url = "rtsp://192.168.1.100:8554/test";
+		// String url = "rtsp://192.168.1.7:8554/1";
 		// videoView.setVideoURI(Uri.parse(url));
 
 		// 开始播放视频

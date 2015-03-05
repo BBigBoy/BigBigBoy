@@ -42,8 +42,24 @@ import android.widget.TextView;
 import java.util.Locale;
 
 import com.example.kksmartcontrol.R;
+import com.kksmartcontrol.activity.MainActivity;
 
 public class PagerSlidingTabStrip extends HorizontalScrollView {
+
+	/**
+	 * 
+	 * 更新activity的title内容
+	 * 
+	 * @author BBBoy
+	 * 
+	 */
+	public interface RefreshActivity {
+		public void refreshTitle(int position);
+
+		public void refreshDisplayLayout(int position);
+
+		public void refreshTextAlpha(float alpha);
+	}
 
 	public interface IconTabProvider {
 		public int getPageIconResId(int position);
@@ -59,7 +75,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	private final PageListener pageListener = new PageListener();
 	public OnPageChangeListener delegatePageListener;
-
+	private RefreshActivity activityContent;
 	private LinearLayout tabsContainer;
 	private ViewPager pager;
 
@@ -109,9 +125,10 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	public PagerSlidingTabStrip(Context context, AttributeSet attrs,
 			int defStyle) {
 		super(context, attrs, defStyle);
-
 		setFillViewport(true);
 		setWillNotDraw(false);
+
+		activityContent = ((MainActivity) this.getContext());
 
 		tabsContainer = new LinearLayout(context);
 		tabsContainer.setOrientation(LinearLayout.HORIZONTAL);
@@ -244,6 +261,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		getViewTreeObserver().addOnGlobalLayoutListener(
 				new OnGlobalLayoutListener() {
 
+					@SuppressWarnings("deprecation")
 					@Override
 					public void onGlobalLayout() {
 						getViewTreeObserver()
@@ -403,6 +421,12 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 					.getChildAt(position).getWidth()));
 
 			invalidate();
+			if (positionOffset != 0) {
+				if (selectedPosition != 1)
+					activityContent.refreshTextAlpha(1 - positionOffset);
+				else
+					activityContent.refreshTextAlpha(positionOffset);
+			}
 
 			if (delegatePageListener != null) {
 				delegatePageListener.onPageScrolled(position, positionOffset,
@@ -424,13 +448,15 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 		@Override
 		public void onPageSelected(int position) {
+			// 更新activity的title文字
 			selectedPosition = position;
+			activityContent.refreshTitle(position);
+			activityContent.refreshDisplayLayout(position);
 			updateTabStyles();
 			if (delegatePageListener != null) {
 				delegatePageListener.onPageSelected(position);
 			}
 		}
-
 	}
 
 	public void setIndicatorColor(int indicatorColor) {

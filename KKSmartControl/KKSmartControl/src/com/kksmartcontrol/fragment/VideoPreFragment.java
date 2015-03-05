@@ -2,10 +2,11 @@ package com.kksmartcontrol.fragment;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import com.kksmartcontrol.prevideoview.MyPreVideoView;
+import com.kksmartcontrol.util.FragmentUtil;
 import android.app.Fragment;
-import android.os.Bundle; 
+import android.graphics.Color;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -14,15 +15,13 @@ import android.widget.LinearLayout;
 
 public class VideoPreFragment extends Fragment {
 
-	public static VideoPreFragment videoPreFragment = null;
-	// 正在播放的预览窗口的集合
+	// MyPreVideoView集合
 	public Set<MyPreVideoView> videoList = new HashSet<MyPreVideoView>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		videoPreFragment = this;
 	}
 
 	@Override
@@ -37,25 +36,20 @@ public class VideoPreFragment extends Fragment {
 		// TODO Auto-generated method stub
 		if (!hidden) {
 			for (MyPreVideoView video : videoList) {
-				video.stopPlayback();
+				video.start();
 				video.setVisibility(View.VISIBLE);
+				FragmentUtil.hideFragmentByTag(getActivity(),
+						"VideoPlayFragment");
 			}
 		}
 		if (hidden) {
 			for (MyPreVideoView video : videoList) {
-				video.start();
+				video.stopPlayback();
 				video.setVisibility(View.GONE);
 			}
 		}
 		// Log.d("preVideoPlayingList.toString()", playingList.toString());
 		super.onHiddenChanged(hidden);
-	}
-
-	@Override
-	public void onDestroy() {
-		// TODO Auto-generated method stub
-		videoPreFragment = null;
-		super.onDestroy();
 	}
 
 	private View createPreVideoView() {
@@ -74,6 +68,7 @@ public class VideoPreFragment extends Fragment {
 			}
 			preVideo_layout.addView(linearLayout, params);
 		}
+		preVideo_layout.setBackgroundColor(Color.GREEN);
 		return preVideo_layout;
 	}
 

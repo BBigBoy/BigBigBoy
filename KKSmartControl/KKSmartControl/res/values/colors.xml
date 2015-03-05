@@ -14,6 +14,7 @@
     <color name="grey">#808080</color>
     <color name="transparent">#00000000</color>
     <color name="ivory">#FFFFF0</color>
+    <color name="displaybg">#22292b</color>
     <!-- 象牙色 -->
     <color name="thumbnail_fg">#a0000000</color>
     <color name="detail_brief">#ff000000</color>
@@ -94,5 +95,6 @@
     <color name="orange">#ffefa600</color>
     <color name="silver">#ffecebe8</color>
     <color name="blue">#FF0000FF</color>
+    <color name="dialogbtnnormal"> #0680AA</color>
 
 </resources>

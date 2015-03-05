@@ -2,27 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="20dp"
     android:gravity="center"
     android:orientation="horizontal" >
 
     <Button
         android:id="@+id/DialogBut_ok"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="36dp"
-        android:background="@drawable/thumb_button"
+        android:layout_weight="1"
+        android:background="@drawable/thumb_dialogbtn"
         android:text="@string/submit"
         android:textColor="@color/dialog_btnfont"
-        android:textSize="22sp" />
+        android:textSize="13sp" />
+
+    <TextView
+        android:layout_width="2dp"
+        android:layout_height="match_parent" />
 
     <Button
         android:id="@+id/DialogBut_cancel"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="36dp"
-        android:layout_marginLeft="50dp"
-        android:background="@drawable/thumb_button"
+        android:layout_weight="1"
+        android:background="@drawable/thumb_dialogbtn"
         android:text="@string/quit"
         android:textColor="@color/dialog_btnfont"
-        android:textSize="22sp" />
+        android:textSize="13sp" />
 
 </LinearLayout>

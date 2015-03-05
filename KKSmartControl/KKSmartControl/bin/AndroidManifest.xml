@@ -40,20 +40,6 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Black.NoTitleBar" > 
-        </activity>
-        <activity
-            android:name="com.kksmartcontrol.activity.ControlActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:label="@string/app_name"
-            android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
-        </activity>
-        <activity
-            android:name="com.kksmartcontrol.activity.MediaPlayActivty"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:label="@string/app_name"
-            android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
         <activity

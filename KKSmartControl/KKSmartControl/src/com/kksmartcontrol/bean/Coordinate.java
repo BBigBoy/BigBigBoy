@@ -1,14 +1,23 @@
 package com.kksmartcontrol.bean;
 
 public class Coordinate implements Cloneable {
-	public int X;
-	public int Y;
+	public int columns;
+	public int rows;
+
+	public Coordinate(int rows, int columns) {
+		this.rows = rows;
+		this.columns = columns;
+	}
+
+	public Coordinate() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public boolean equals(Object object) {
 		// TODO Auto-generated method stub
 		Coordinate coordinate = (Coordinate) object;
-		if ((X == coordinate.X) && (Y == coordinate.Y))
+		if ((columns == coordinate.columns) && (rows == coordinate.rows))
 			return true;
 		else
 			return false;
@@ -24,6 +33,7 @@ public class Coordinate implements Cloneable {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "Coordinate.X--->" + this.X + "------Coordinate.Y--->" + this.Y;
+		return "Coordinate.columns--->" + this.columns
+				+ "------Coordinate.rows--->" + this.rows;
 	}
 }

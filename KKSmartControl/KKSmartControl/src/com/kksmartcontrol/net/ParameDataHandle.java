@@ -1,6 +1,6 @@
 package com.kksmartcontrol.net;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.kksmartcontrol.bean.Coordinate;
 
@@ -165,12 +165,12 @@ public class ParameDataHandle {
 	 */
 	public byte getPacketID(Coordinate coordinate, int columnNum, int rowNum) {
 		int id = 0;
-		if ((rowNum - coordinate.Y) % 2 != 0) {
-			id = ((rowNum - coordinate.Y) * columnNum + coordinate.X);
+		if ((rowNum - coordinate.rows) % 2 != 0) {
+			id = ((rowNum - coordinate.rows) * columnNum + coordinate.columns);
 
 		} else {
-			id = ((rowNum - coordinate.Y) * columnNum + (columnNum
-					- coordinate.X + 1));
+			id = ((rowNum - coordinate.rows) * columnNum + (columnNum
+					- coordinate.columns + 1));
 		}
 		return (byte) id;
 	}
@@ -185,9 +185,9 @@ public class ParameDataHandle {
 	public byte getPacketDataLow(Coordinate itemCoordinate,
 			Coordinate[] polarCoordinate) {
 
-		int dataLow = (itemCoordinate.X - polarCoordinate[0].X) + 1
-				+ (itemCoordinate.Y - polarCoordinate[0].Y)
-				* (polarCoordinate[1].X - polarCoordinate[0].X + 1);
+		int dataLow = (itemCoordinate.columns - polarCoordinate[0].columns) + 1
+				+ (itemCoordinate.rows - polarCoordinate[0].rows)
+				* (polarCoordinate[1].columns - polarCoordinate[0].columns + 1);
 
 		return (byte) dataLow;
 	}
@@ -198,8 +198,8 @@ public class ParameDataHandle {
 	 * @return
 	 */
 	public byte getPacketDataHigh(Coordinate[] polarCoordinate) {
-		int dataHigh = (polarCoordinate[1].X - polarCoordinate[0].X + 1) * 16
-				+ polarCoordinate[1].Y - polarCoordinate[0].Y + 1;
+		int dataHigh = (polarCoordinate[1].columns - polarCoordinate[0].columns + 1)
+				* 16 + polarCoordinate[1].rows - polarCoordinate[0].rows + 1;
 
 		return (byte) dataHigh;
 	}
@@ -210,7 +210,7 @@ public class ParameDataHandle {
 	 * @return 返回最大及最小行列值的坐标对象
 	 * @throws CloneNotSupportedException
 	 */
-	public Coordinate[] getPolarCoordinates(ArrayList<Coordinate> coordinateList) {
+	public Coordinate[] getPolarCoordinates(List<Coordinate> coordinateList) {
 		Log.d(TAG, coordinateList.toString());
 		// polarCoordinates极坐标
 		// polarCoordinates[0]行列值最小的拼接屏
@@ -226,15 +226,15 @@ public class ParameDataHandle {
 		}
 
 		for (Coordinate item : coordinateList) {
-			if (item.X > polarCoordinates[1].X)
-				polarCoordinates[1].X = item.X;
-			else if (item.X < polarCoordinates[0].X)
-				polarCoordinates[0].X = item.X;
+			if (item.columns > polarCoordinates[1].columns)
+				polarCoordinates[1].columns = item.columns;
+			else if (item.columns < polarCoordinates[0].columns)
+				polarCoordinates[0].columns = item.columns;
 
-			if (item.Y > polarCoordinates[1].Y)
-				polarCoordinates[1].Y = item.Y;
-			else if (item.Y < polarCoordinates[0].Y)
-				polarCoordinates[0].Y = item.Y;
+			if (item.rows > polarCoordinates[1].rows)
+				polarCoordinates[1].rows = item.rows;
+			else if (item.rows < polarCoordinates[0].rows)
+				polarCoordinates[0].rows = item.rows;
 		}
 		return polarCoordinates;
 	}
